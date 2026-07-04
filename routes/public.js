@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   `).all();
 
   res.render('index', {
-    title: 'Kuchyně Cíhovský — kuchyně na míru',
+    title: 'Kuchyně Čihovský — kuchyně na míru',
     featured
   });
 });
@@ -57,7 +57,7 @@ function renderSection(res, section, opts) {
 // Kuchyně (hlavní činnost)
 router.get('/kuchyne', (req, res) => {
   renderSection(res, 'kuchyne', {
-    title: 'Kuchyně na míru — Kuchyně Cíhovský',
+    title: 'Kuchyně na míru — Kuchyně Čihovský',
     heading: 'Kuchyně',
     lead: 'Naše hlavní řemeslo. Každá kuchyně vzniká v naší dílně přesně na míru vašemu prostoru a způsobu vaření.',
     baseUrl: '/kuchyne'
@@ -68,7 +68,7 @@ router.get('/kuchyne/:slug', (req, res, next) => {
   const cat = db.prepare('SELECT * FROM categories WHERE slug = ? AND section = ?').get(req.params.slug, 'kuchyne');
   if (!cat) return next();
   renderSection(res, 'kuchyne', {
-    title: `${cat.name} — Kuchyně Cíhovský`,
+    title: `${cat.name} — Kuchyně Čihovský`,
     heading: cat.name,
     lead: cat.description || 'Vybraná fotografie z realizací.',
     baseUrl: '/kuchyne',
@@ -79,7 +79,7 @@ router.get('/kuchyne/:slug', (req, res, next) => {
 // Dále nabízíme (dveře, skříně, ostatní)
 router.get('/dale-nabizime', (req, res) => {
   renderSection(res, 'ostatni', {
-    title: 'Dále nabízíme — Kuchyně Cíhovský',
+    title: 'Dále nabízíme — Kuchyně Čihovský',
     heading: 'Dále nabízíme',
     lead: 'Kromě kuchyní vyrábíme na míru také dveře, vestavěné skříně a další nábytek. Vše ze stejné dílny a se stejným řemeslným standardem.',
     baseUrl: '/dale-nabizime'
@@ -90,7 +90,7 @@ router.get('/dale-nabizime/:slug', (req, res, next) => {
   const cat = db.prepare('SELECT * FROM categories WHERE slug = ? AND section = ?').get(req.params.slug, 'ostatni');
   if (!cat) return next();
   renderSection(res, 'ostatni', {
-    title: `${cat.name} — Kuchyně Cíhovský`,
+    title: `${cat.name} — Kuchyně Čihovský`,
     heading: cat.name,
     lead: cat.description || 'Vybraná fotografie z realizací.',
     baseUrl: '/dale-nabizime',
@@ -109,12 +109,12 @@ router.get('/realizace/:slug', (req, res) => {
 
 // ── O NÁS ────────────────────────────────────────────────────────────────
 router.get('/o-nas', (req, res) => {
-  res.render('o-nas', { title: 'O nás — Kuchyně Cíhovský' });
+  res.render('o-nas', { title: 'O nás — Kuchyně Čihovský' });
 });
 
 // ── KONTAKT ──────────────────────────────────────────────────────────────
 router.get('/kontakt', (req, res) => {
-  res.render('kontakt', { title: 'Kontakt — Kuchyně Cíhovský', sent: false, error: null });
+  res.render('kontakt', { title: 'Kontakt — Kuchyně Čihovský', sent: false, error: null });
 });
 
 router.post('/kontakt', async (req, res) => {
@@ -128,11 +128,11 @@ router.post('/kontakt', async (req, res) => {
 
   // honeypot
   if ((req.body.website || '').trim() !== '') {
-    return res.render('kontakt', { title: 'Kontakt — Kuchyně Cíhovský', sent: true, error: null });
+    return res.render('kontakt', { title: 'Kontakt — Kuchyně Čihovský', sent: true, error: null });
   }
   if (!name || !email) {
     return res.render('kontakt', {
-      title: 'Kontakt — Kuchyně Cíhovský',
+      title: 'Kontakt — Kuchyně Čihovský',
       sent: false,
       error: 'Vyplňte prosím jméno a e-mail.'
     });
@@ -156,7 +156,7 @@ router.post('/kontakt', async (req, res) => {
     console.error('Odeslání e-mailu selhalo:', err.message);
   }
 
-  res.render('kontakt', { title: 'Kontakt — Kuchyně Cíhovský', sent: true, error: null });
+  res.render('kontakt', { title: 'Kontakt — Kuchyně Čihovský', sent: true, error: null });
 });
 
 module.exports = router;

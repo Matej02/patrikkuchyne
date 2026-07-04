@@ -284,12 +284,8 @@
       });
     });
 
-    // Klik na radio = přejít automaticky na další krok (jen kroky 1-3)
-    wizard.querySelectorAll('.wizard-step[data-step="1"] input[type=radio], .wizard-step[data-step="2"] input[type=radio], .wizard-step[data-step="3"] input[type=radio]').forEach(radio => {
-      radio.addEventListener('change', () => {
-        setTimeout(() => goTo(current + 1), 250);
-      });
-    });
+    // Poznámka: auto-přechod na další krok odstraněn — user může svobodně
+    // změnit volbu a klikne na Pokračovat sám (méně matoucí).
   }
 
   // ── LIGHTBOX ───────────────────────────────────────────────────

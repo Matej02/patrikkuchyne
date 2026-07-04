@@ -150,17 +150,56 @@ router.post('/nahrat', requireAuth, upload.array('photos', 30), async (req, res)
   }
 });
 
-router.post('/fotky/:id/upravit', requireAuth, (req, res) => {
+router.post('/fotky/:id/upravit', requireAuth, upload.single('replacement'), async (req, res) => {
   const { title, description, category_id } = req.body;
-  db.prepare(`
-    UPDATE photos SET title = ?, description = ?, category_id = ? WHERE id = ?
-  `).run(
-    (title || '').trim() || null,
-    (description || '').trim() || null,
-    category_id ? Number(category_id) : null,
-    req.params.id
-  );
-  res.redirect('back');
+  const photo = db.prepare('SELECT * FROM photos WHERE id = ?').get(req.params.id);
+  if (!photo) return res.redirect('/admin/fotky');
+
+  // Výměna souboru — pokud nahrál nový, smaž staré, zpracuj nový
+  if (req.file) {
+    // Zpracovat nový soubor stejně jako v /nahrat
+    const f = req.file;
+    const thumbName = 'thumb-' + f.filename.replace(/\.[^.]+$/, '.webp');
+    const thumbPath = path.join(uploadsDir, thumbName);
+    try {
+      await sharp(f.path)
+        .rotate()
+        .resize({ width: 800, height: 800, fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: 82 })
+        .toFile(thumbPath);
+    } catch (err) {
+      console.warn('Thumbnail selhal:', err.message);
+    }
+    // Smazat staré soubory
+    for (const oldName of [photo.filename, photo.thumb_filename]) {
+      if (!oldName) continue;
+      const p = path.join(uploadsDir, oldName);
+      if (fs.existsSync(p)) {
+        try { fs.unlinkSync(p); } catch (e) { console.warn(e.message); }
+      }
+    }
+    db.prepare(`
+      UPDATE photos SET filename = ?, thumb_filename = ?, title = ?, description = ?, category_id = ? WHERE id = ?
+    `).run(
+      f.filename,
+      fs.existsSync(thumbPath) ? thumbName : f.filename,
+      (title || '').trim() || null,
+      (description || '').trim() || null,
+      category_id ? Number(category_id) : null,
+      req.params.id
+    );
+  } else {
+    // Jen aktualizovat metadata
+    db.prepare(`
+      UPDATE photos SET title = ?, description = ?, category_id = ? WHERE id = ?
+    `).run(
+      (title || '').trim() || null,
+      (description || '').trim() || null,
+      category_id ? Number(category_id) : null,
+      req.params.id
+    );
+  }
+  res.redirect('/admin/fotky' + (req.query.kategorie ? '?kategorie=' + req.query.kategorie : ''));
 });
 
 router.post('/fotky/:id/smazat', requireAuth, (req, res) => {

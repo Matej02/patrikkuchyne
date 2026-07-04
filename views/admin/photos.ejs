@@ -8,8 +8,13 @@
   <a href="/admin/nahrat" class="btn btn--primary">↑ Nahrát další</a>
 </header>
 
+<div class="admin-hint">
+  💡 <strong>Jak spravovat fotky:</strong>
+  Klikněte na kartu <strong>Upravit</strong> pod fotkou. Můžete změnit název, popis, kategorii, nebo <strong>vyměnit soubor</strong> za jiný. Odkaz <strong>Zobrazuje se v</strong> vás rovnou pošle na stránku webu, kde fotka je.
+</div>
+
 <nav class="filter-bar filter-bar--admin">
-  <a href="/admin/fotky" class="filter <%= !filter ? 'is-active' : '' %>">Vše</a>
+  <a href="/admin/fotky" class="filter <%= !filter ? 'is-active' : '' %>">Vše (<%= photos.length %>)</a>
   <% if (categoriesKuchyne.length) { %>
     <span class="filter-group-label">Kuchyně:</span>
     <% categoriesKuchyne.forEach(function(cat){ %>
@@ -32,52 +37,119 @@
     <a href="/admin/nahrat" class="btn btn--primary">Nahrát první fotky</a>
   </div>
 <% } else { %>
-  <div class="photo-manage-grid">
-    <% photos.forEach(function(p){ %>
-      <details class="photo-card">
-        <summary>
-          <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="" />
-          <div class="photo-card-meta">
-            <% if (p.cat_name) { %><span class="tag tag--dark"><%= p.cat_name %></span><% } %>
-            <strong><%= p.title || 'Bez názvu' %></strong>
-            <small><%= new Date(p.created_at).toLocaleDateString('cs-CZ') %></small>
-          </div>
-        </summary>
-        <div class="photo-card-body">
-          <form method="POST" action="/admin/fotky/<%= p.id %>/upravit" class="stack">
-            <label><span>Název</span><input type="text" name="title" value="<%= p.title || '' %>" /></label>
-            <label><span>Popis</span><textarea name="description" rows="2"><%= p.description || '' %></textarea></label>
-            <label>
-              <span>Kategorie</span>
-              <select name="category_id">
-                <option value="">— žádná —</option>
-                <% if (categoriesKuchyne.length) { %>
-                  <optgroup label="Kuchyně">
-                    <% categoriesKuchyne.forEach(function(cat){ %>
-                      <option value="<%= cat.id %>" <%= p.category_id === cat.id ? 'selected' : '' %>><%= cat.name %></option>
-                    <% }); %>
-                  </optgroup>
-                <% } %>
-                <% if (categoriesOstatni.length) { %>
-                  <optgroup label="Dále nabízíme">
-                    <% categoriesOstatni.forEach(function(cat){ %>
-                      <option value="<%= cat.id %>" <%= p.category_id === cat.id ? 'selected' : '' %>><%= cat.name %></option>
-                    <% }); %>
-                  </optgroup>
-                <% } %>
-              </select>
-            </label>
-            <div class="form-actions form-actions--row">
-              <button type="submit" class="btn btn--primary btn--sm">Uložit</button>
-              <button type="button" class="btn btn--danger btn--sm"
-                      onclick="confirmDelete(<%= p.id %>)">Smazat</button>
-            </div>
-          </form>
-          <form id="delete-<%= p.id %>" method="POST" action="/admin/fotky/<%= p.id %>/smazat" style="display:none"></form>
+  <div class="admin-photo-grid">
+    <% photos.forEach(function(p){
+      // Určit, kde na webu fotka je
+      let liveUrl = null;
+      let liveLabel = null;
+      if (p.cat_slug) {
+        const sec = (categoriesKuchyne.find(c => c.slug === p.cat_slug)) ? 'kuchyne' : 'dale-nabizime';
+        liveUrl = '/' + sec + '/' + p.cat_slug;
+        liveLabel = (sec === 'kuchyne' ? 'Kuchyně' : 'Dále nabízíme') + ' → ' + p.cat_name;
+      }
+    %>
+      <article class="admin-photo-card">
+        <a class="admin-photo-thumb" href="/uploads/<%= p.filename %>" target="_blank" title="Otevřít originál v novém okně">
+          <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="" loading="lazy" />
+          <span class="admin-photo-zoom">↗</span>
+        </a>
+        <div class="admin-photo-info">
+          <% if (p.cat_name) { %>
+            <span class="tag tag--dark"><%= p.cat_name %></span>
+          <% } else { %>
+            <span class="tag tag--warn">Bez kategorie</span>
+          <% } %>
+          <strong class="admin-photo-title"><%= p.title || 'Bez názvu' %></strong>
+          <small class="admin-photo-date"><%= new Date(p.created_at).toLocaleDateString('cs-CZ') %></small>
+          <% if (liveUrl) { %>
+            <a href="<%= liveUrl %>" target="_blank" class="admin-photo-live">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M14 10l7-7M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+              Zobrazuje se v: <%= liveLabel %>
+            </a>
+          <% } %>
         </div>
-      </details>
+        <div class="admin-photo-actions">
+          <button type="button" class="btn btn--sm" onclick="openEdit(<%= p.id %>)">Upravit</button>
+          <button type="button" class="btn btn--danger btn--sm" onclick="confirmDelete(<%= p.id %>)">Smazat</button>
+        </div>
+
+        <!-- Skrytý formulář pro mazání (submit z JS) -->
+        <form id="delete-<%= p.id %>" method="POST" action="/admin/fotky/<%= p.id %>/smazat" style="display:none"></form>
+
+        <!-- Modal pro editaci -->
+        <dialog id="edit-<%= p.id %>" class="admin-modal">
+          <div class="admin-modal-inner">
+            <header class="admin-modal-head">
+              <h3>Upravit fotku</h3>
+              <button type="button" class="admin-modal-close" onclick="closeEdit(<%= p.id %>)" aria-label="Zavřít">×</button>
+            </header>
+            <div class="admin-modal-body">
+              <div class="admin-modal-preview">
+                <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="" id="preview-<%= p.id %>" />
+              </div>
+              <form method="POST" action="/admin/fotky/<%= p.id %>/upravit" enctype="multipart/form-data" class="admin-form">
+                <label>
+                  <span>Vyměnit fotku (nechte prázdné pro zachování původní)</span>
+                  <input type="file" name="replacement" accept="image/*" onchange="previewFile(this, <%= p.id %>)" />
+                </label>
+                <label>
+                  <span>Název</span>
+                  <input type="text" name="title" value="<%= p.title || '' %>" />
+                </label>
+                <label>
+                  <span>Popis</span>
+                  <textarea name="description" rows="3"><%= p.description || '' %></textarea>
+                </label>
+                <label>
+                  <span>Kategorie</span>
+                  <select name="category_id">
+                    <option value="">— žádná —</option>
+                    <% if (categoriesKuchyne.length) { %>
+                      <optgroup label="Kuchyně">
+                        <% categoriesKuchyne.forEach(function(cat){ %>
+                          <option value="<%= cat.id %>" <%= p.category_id === cat.id ? 'selected' : '' %>><%= cat.name %></option>
+                        <% }); %>
+                      </optgroup>
+                    <% } %>
+                    <% if (categoriesOstatni.length) { %>
+                      <optgroup label="Dále nabízíme">
+                        <% categoriesOstatni.forEach(function(cat){ %>
+                          <option value="<%= cat.id %>" <%= p.category_id === cat.id ? 'selected' : '' %>><%= cat.name %></option>
+                        <% }); %>
+                      </optgroup>
+                    <% } %>
+                  </select>
+                </label>
+                <div class="form-actions">
+                  <button type="button" class="btn btn--ghost btn--dark" onclick="closeEdit(<%= p.id %>)">Zrušit</button>
+                  <button type="submit" class="btn btn--primary">Uložit změny</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      </article>
     <% }); %>
   </div>
 <% } %>
+
+<script>
+function openEdit(id) {
+  const dlg = document.getElementById('edit-' + id);
+  if (dlg && typeof dlg.showModal === 'function') dlg.showModal();
+  else if (dlg) dlg.setAttribute('open', '');
+}
+function closeEdit(id) {
+  const dlg = document.getElementById('edit-' + id);
+  if (dlg && typeof dlg.close === 'function') dlg.close();
+  else if (dlg) dlg.removeAttribute('open');
+}
+function previewFile(input, id) {
+  if (!input.files || !input.files[0]) return;
+  const url = URL.createObjectURL(input.files[0]);
+  const img = document.getElementById('preview-' + id);
+  if (img) img.src = url;
+}
+</script>
 
 <%- include('_layout-end') %>

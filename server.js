@@ -65,6 +65,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n  Kuchyně Cíhovský — server běží na http://localhost:${PORT}`);
+  console.log(`\n  Kuchyně Čihovský — server běží na http://localhost:${PORT}`);
   console.log(`  Admin: http://localhost:${PORT}/admin/login\n`);
 });

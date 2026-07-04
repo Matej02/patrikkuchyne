@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   Kuchyně Cíhovský — v2 cinematic redesign
+   Kuchyně Čihovský — v2 cinematic redesign
    Vlivy: kuchynerondo.cz, truhlarzbudejc.cz
    Design: warm brown/beige, cinematic, interactive
    ═══════════════════════════════════════════════════════════════════════ */
@@ -395,17 +395,21 @@ body.is-loaded .hero-cta-cinematic { opacity: 1; transform: translateY(0); trans
   font-family: var(--font-display);
   font-size: clamp(24px, 3vw, 44px);
   font-weight: 400;
-
   letter-spacing: -0.01em;
   white-space: nowrap;
-  animation: marquee 40s linear infinite;
+  animation: marquee 60s linear infinite;
+  /* GPU akcelerace + fix pro sub-pixel rozmazání */
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.marquee-track span { flex-shrink: 0; }
+.marquee-track span { flex-shrink: 0; transform: translateZ(0); }
 .marquee-dot { color: var(--accent); font-size: 0.6em; }
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 .footer-marquee {
   background: var(--dark);
@@ -637,24 +641,42 @@ body.is-loaded .hero-cta-cinematic { opacity: 1; transform: translateY(0); trans
 /* ═══════════════════════════════════════════════
    HORIZONTAL SCROLL GALLERY
    ═══════════════════════════════════════════════ */
-.hscroll-section { padding-right: 0; overflow: hidden; }
+.hscroll-section { padding-right: 0; overflow: hidden; position: relative; }
 .hscroll-head {
   padding-right: clamp(20px, 4vw, 60px);
   margin-bottom: clamp(40px, 5vw, 60px);
-  display: flex; align-items: flex-end;
-  justify-content: space-between; gap: 32px; flex-wrap: wrap;
 }
-.hscroll-controls { display: flex; gap: 12px; }
-.hscroll-btn {
+.hscroll-wrap {
+  position: relative;
+}
+.hscroll-side {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 10;
   width: 56px; height: 56px;
+  background: rgba(32,20,8,.85);
+  backdrop-filter: blur(8px);
   border: 1.5px solid var(--cream);
   color: var(--cream);
   display: grid; place-items: center;
-  transition: background .3s, color .3s, transform .3s;
+  transition: background .3s, transform .3s, opacity .3s;
+  cursor: pointer;
 }
-.hscroll-btn svg { width: 20px; height: 20px; }
-.hscroll-btn:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
-.hscroll-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.hscroll-side svg { width: 22px; height: 22px; }
+.hscroll-side--prev { left: 20px; }
+.hscroll-side--next { right: 20px; }
+.hscroll-side:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.08);
+}
+.hscroll-side:disabled { opacity: 0.3; cursor: not-allowed; }
+@media (max-width: 700px) {
+  .hscroll-side { width: 44px; height: 44px; }
+  .hscroll-side--prev { left: 8px; }
+  .hscroll-side--next { right: 8px; }
+}
 
 .hscroll-track {
   display: flex;
@@ -892,11 +914,6 @@ body.is-loaded .hero-cta-cinematic { opacity: 1; transform: translateY(0); trans
 }
 .testimonial.is-visible { opacity: 1; transform: translateY(0); }
 .testimonial:hover { border-color: var(--accent); transform: translateY(-4px); }
-.testimonial--featured { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-.testimonial--featured:hover { border-color: var(--accent); }
-.testimonial--featured footer strong,
-.testimonial--featured p { color: var(--cream); }
-.testimonial--featured footer span { color: rgba(247,236,212,.6); }
 
 .quote-mark {
   position: absolute; top: -30px; left: 24px;
@@ -928,6 +945,14 @@ body.is-loaded .hero-cta-cinematic { opacity: 1; transform: translateY(0); trans
   color: var(--muted);
   font-style: normal;
 }
+
+/* Featured — MUSÍ být za obecným .testimonial p, aby přebilo barvu textu */
+.testimonial--featured { background: var(--ink); border-color: var(--ink); }
+.testimonial--featured:hover { border-color: var(--accent); }
+.testimonial--featured p { color: var(--cream); }
+.testimonial--featured footer strong { color: var(--cream); }
+.testimonial--featured footer span { color: rgba(247,236,212,.7); }
+.testimonial--featured .quote-mark { color: var(--accent); }
 
 /* ═══════════════════════════════════════════════
    CTA BANNER — parallax
@@ -1517,12 +1542,16 @@ body.is-loaded .hero-cta-cinematic { opacity: 1; transform: translateY(0); trans
 @media (max-width: 600px) {
   .wizard-choices { grid-template-columns: 1fr; }
 }
-.wizard-choice { display: block; cursor: pointer; }
+.wizard-choice { display: block; cursor: pointer; position: relative; }
 .wizard-choice--wide { grid-column: 1 / -1; }
 .wizard-choice input {
   position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   opacity: 0;
-  pointer-events: none;
+  cursor: pointer;
+  z-index: 1;
+  margin: 0;
 }
 .wizard-choice-box {
   display: flex; flex-direction: column;

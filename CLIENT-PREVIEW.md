@@ -31,7 +31,7 @@ Můžeš přes GitHub — je to nejrychlejší.
 cd ~/Desktop/patrik/kuchyne-web
 git init
 git add .
-git commit -m "Initial commit — Kuchyně Cíhovský web"
+git commit -m "Initial commit — Kuchyně Čihovský web"
 # Vytvoř na github.com nový repo, pak:
 git remote add origin git@github.com:TVUJ-USER/kuchyne-cihovsky.git
 git branch -M main
@@ -85,7 +85,7 @@ Doporučuju spíš Render — je stabilní, klient se může vracet a nemusíš 
 ## Znění mailu klientovi (návrh, uprav podle sebe)
 
 ```
-Předmět: Návrh nového webu Kuchyně Cíhovský — k prohlédnutí
+Předmět: Návrh nového webu Kuchyně Čihovský — k prohlédnutí
 
 Dobrý den,
 

@@ -1,4 +1,4 @@
-# Kuchyně Cíhovský — nový web s administrací
+# Kuchyně Čihovský — nový web s administrací
 
 Kompletní web na míru s administračním rozhraním pro správu fotogalerie.
 Postaveno na Node.js + Express + SQLite. Vše v jedné složce, žádná externí databáze.
@@ -75,7 +75,7 @@ SMTP_PORT=465
 SMTP_SECURE=true                    # true pro port 465, false pro 587
 SMTP_USER=info@kuchyne-cihovsky.cz
 SMTP_PASS=heslo-nebo-app-password
-MAIL_FROM="Web Kuchyně Cíhovský <info@kuchyne-cihovsky.cz>"
+MAIL_FROM="Web Kuchyně Čihovský <info@kuchyne-cihovsky.cz>"
 MAIL_TO=info@kuchyne-cihovsky.cz    # kam chodí poptávky
 ```
 
