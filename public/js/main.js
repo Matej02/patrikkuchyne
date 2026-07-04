@@ -207,6 +207,91 @@
     }, { passive: true });
   }
 
+  // ── MULTI-STEP WIZARD (kontakt) ────────────────────────────────
+  const wizard = document.querySelector('[data-wizard]');
+  if (wizard) {
+    const steps = wizard.querySelectorAll('.wizard-step');
+    const labels = wizard.querySelectorAll('[data-step-label]');
+    const fill = wizard.querySelector('[data-progress-fill]');
+    const summary = wizard.querySelector('[data-wizard-summary]');
+    const totalSteps = steps.length;
+    let current = 1;
+
+    function goTo(n) {
+      if (n < 1 || n > totalSteps) return;
+      const target = wizard.querySelector(`.wizard-step[data-step="${n}"]`);
+      if (!target) return;
+
+      // validace předchozích kroků při postupu vpřed
+      if (n > current) {
+        for (let i = current; i < n; i++) {
+          const step = wizard.querySelector(`.wizard-step[data-step="${i}"]`);
+          const inputs = step.querySelectorAll('input[required]:not([type=radio]), input[type=radio][required]');
+          const radios = step.querySelectorAll('input[type=radio][required]');
+          if (radios.length && !Array.from(radios).some(r => r.checked)) {
+            step.classList.add('wizard-step--error');
+            setTimeout(() => step.classList.remove('wizard-step--error'), 400);
+            return;
+          }
+          for (const inp of inputs) {
+            if (inp.type !== 'radio' && !inp.checkValidity()) {
+              inp.reportValidity();
+              return;
+            }
+          }
+        }
+      }
+
+      current = n;
+      steps.forEach(s => s.classList.toggle('is-active', s.dataset.step == n));
+      labels.forEach(l => l.classList.toggle('is-active', l.dataset.stepLabel == n));
+      labels.forEach(l => l.classList.toggle('is-done', Number(l.dataset.stepLabel) < n));
+      if (fill) fill.style.width = ((n - 1) / (totalSteps - 1) * 100) + '%';
+
+      // souhrn na posledním kroku
+      if (n === totalSteps && summary) {
+        const plan = wizard.querySelector('input[name=plan]:checked');
+        const term = wizard.querySelector('input[name=term]:checked');
+        const budget = wizard.querySelector('input[name=budget]:checked');
+        summary.innerHTML = `
+          <div class="wizard-summary-inner">
+            <span class="eyebrow">Vaše volba</span>
+            <ul>
+              ${plan ? `<li><strong>Co:</strong> ${plan.value}</li>` : ''}
+              ${term ? `<li><strong>Kdy:</strong> ${term.value}</li>` : ''}
+              ${budget ? `<li><strong>Rozpočet:</strong> ${budget.value}</li>` : ''}
+            </ul>
+          </div>
+        `;
+      }
+
+      // scroll to top of wizard on step change (mobile)
+      wizard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    wizard.querySelectorAll('[data-wizard-next]').forEach(btn => {
+      btn.addEventListener('click', () => goTo(current + 1));
+    });
+    wizard.querySelectorAll('[data-wizard-prev]').forEach(btn => {
+      btn.addEventListener('click', () => goTo(current - 1));
+    });
+
+    // Klik na label = skok pokud je krok již vyplněný
+    labels.forEach(l => {
+      l.addEventListener('click', () => {
+        const n = Number(l.dataset.stepLabel);
+        if (n <= current || l.classList.contains('is-done')) goTo(n);
+      });
+    });
+
+    // Klik na radio = přejít automaticky na další krok (jen kroky 1-3)
+    wizard.querySelectorAll('.wizard-step[data-step="1"] input[type=radio], .wizard-step[data-step="2"] input[type=radio], .wizard-step[data-step="3"] input[type=radio]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        setTimeout(() => goTo(current + 1), 250);
+      });
+    });
+  }
+
   // ── LIGHTBOX ───────────────────────────────────────────────────
   const items = Array.from(document.querySelectorAll('[data-lightbox]'));
   if (items.length === 0) return;

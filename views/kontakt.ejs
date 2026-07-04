@@ -6,7 +6,7 @@
   <div class="container">
     <span class="eyebrow">Kontakt</span>
     <h1 class="display display--xl">Pojďme se<br>bavit o vaší<br><em>kuchyni</em>.</h1>
-    <p class="page-lead">Napište nám, zavolejte nebo se stavte v naší dílně. Konzultace je nezávazná.</p>
+    <p class="page-lead">Vyplňte 4 krátké kroky a my vám do jednoho pracovního dne pošleme první odpověď.</p>
   </div>
 </section>
 
@@ -47,30 +47,195 @@
     <div class="contact-form-wrap">
       <% if (sent) { %>
         <div class="alert alert--success">
-          <strong>Děkujeme, zprávu jsme dostali.</strong>
-          <p>Ozveme se vám co nejdřív — obvykle do jednoho pracovního dne.</p>
+          <strong>Děkujeme, poptávku máme.</strong>
+          <p>Ozveme se vám do jednoho pracovního dne. Mezitím koukněte na <a href="/kuchyne" style="text-decoration:underline">naše realizace</a> — možná najdete inspiraci.</p>
         </div>
       <% } else { %>
-        <form class="contact-form" method="POST" action="/kontakt">
+        <form class="wizard" method="POST" action="/kontakt" data-wizard>
           <% if (error) { %><div class="alert alert--error"><%= error %></div><% } %>
-          <label>
-            <span>Jméno *</span>
-            <input type="text" name="name" required />
-          </label>
-          <label>
-            <span>E-mail *</span>
-            <input type="email" name="email" required />
-          </label>
-          <label>
-            <span>Telefon</span>
-            <input type="tel" name="phone" />
-          </label>
-          <label>
-            <span>Co plánujete? *</span>
-            <textarea name="message" rows="6" required placeholder="Jaký prostor máte a co byste chtěli? Rádi si projdeme detaily."></textarea>
-          </label>
-          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true" />
-          <button type="submit" class="btn btn--primary btn--lg">Odeslat poptávku →</button>
+
+          <div class="wizard-progress">
+            <div class="wizard-progress-bar"><div class="wizard-progress-fill" data-progress-fill></div></div>
+            <div class="wizard-steps-labels">
+              <span class="wizard-step-label is-active" data-step-label="1">1 · Co plánujete</span>
+              <span class="wizard-step-label" data-step-label="2">2 · Kdy</span>
+              <span class="wizard-step-label" data-step-label="3">3 · Rozpočet</span>
+              <span class="wizard-step-label" data-step-label="4">4 · Kontakt</span>
+            </div>
+          </div>
+
+          <!-- KROK 1 — Co plánujete -->
+          <fieldset class="wizard-step is-active" data-step="1">
+            <legend class="wizard-legend">
+              <span class="wizard-legend-num">01</span>
+              Co pro vás máme vyrobit?
+            </legend>
+            <div class="wizard-choices">
+              <label class="wizard-choice">
+                <input type="radio" name="plan" value="Kuchyň na míru" required>
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Kuchyň na míru</span>
+                  <span class="wizard-choice-desc">Kompletní kuchyň včetně spotřebičů a montáže</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="plan" value="Dveře">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Dveře na míru</span>
+                  <span class="wizard-choice-desc">Interiérové, posuvné, prosklené — do celého bytu</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="plan" value="Vestavěné skříně">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Vestavěné skříně</span>
+                  <span class="wizard-choice-desc">Šatny, úložné prostory, garderoby</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="plan" value="Nábytek na míru">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Nábytek na míru</span>
+                  <span class="wizard-choice-desc">Knihovny, komody, dětské pokoje</span>
+                </span>
+              </label>
+              <label class="wizard-choice wizard-choice--wide">
+                <input type="radio" name="plan" value="Ještě nejsem rozhodnutý">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Ještě nejsem rozhodnutý</span>
+                  <span class="wizard-choice-desc">Rád si popovídám o možnostech</span>
+                </span>
+              </label>
+            </div>
+            <div class="wizard-actions">
+              <span></span>
+              <button type="button" class="btn btn--primary" data-wizard-next>Pokračovat →</button>
+            </div>
+          </fieldset>
+
+          <!-- KROK 2 — Kdy -->
+          <fieldset class="wizard-step" data-step="2">
+            <legend class="wizard-legend">
+              <span class="wizard-legend-num">02</span>
+              Kdy s tím chcete začít?
+            </legend>
+            <div class="wizard-choices">
+              <label class="wizard-choice">
+                <input type="radio" name="term" value="Co nejdřív" required>
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Co nejdřív</span>
+                  <span class="wizard-choice-desc">Rozhodnutí padlo, jde se stavět</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="term" value="Do 3 měsíců">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Do 3 měsíců</span>
+                  <span class="wizard-choice-desc">Máme čas na návrh a přípravu</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="term" value="Do půl roku">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Do půl roku</span>
+                  <span class="wizard-choice-desc">Sbíráme informace, plánujeme</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="term" value="Zatím se rozkoukávám">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Zatím se rozkoukávám</span>
+                  <span class="wizard-choice-desc">Zjišťuji možnosti a ceny</span>
+                </span>
+              </label>
+            </div>
+            <div class="wizard-actions">
+              <button type="button" class="btn btn--ghost btn--dark" data-wizard-prev>← Zpět</button>
+              <button type="button" class="btn btn--primary" data-wizard-next>Pokračovat →</button>
+            </div>
+          </fieldset>
+
+          <!-- KROK 3 — Rozpočet -->
+          <fieldset class="wizard-step" data-step="3">
+            <legend class="wizard-legend">
+              <span class="wizard-legend-num">03</span>
+              Jaký rozpočet zvažujete?
+            </legend>
+            <p class="wizard-hint">Nemusíte to teď řešit — pomůže nám to jen navrhnout materiály přiměřené vašim představám.</p>
+            <div class="wizard-choices">
+              <label class="wizard-choice">
+                <input type="radio" name="budget" value="do 100 000 Kč" required>
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">do 100 000 Kč</span>
+                  <span class="wizard-choice-desc">Základní varianta</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="budget" value="100 000 – 250 000 Kč">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">100 000 – 250 000 Kč</span>
+                  <span class="wizard-choice-desc">Střední třída, kvalitní materiály</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="budget" value="250 000 – 500 000 Kč">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">250 000 – 500 000 Kč</span>
+                  <span class="wizard-choice-desc">Prémiové materiály, kámen, spotřebiče</span>
+                </span>
+              </label>
+              <label class="wizard-choice">
+                <input type="radio" name="budget" value="500 000 Kč a více">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">500 000 Kč a více</span>
+                  <span class="wizard-choice-desc">Nadstandard, masiv, jedinečné řešení</span>
+                </span>
+              </label>
+              <label class="wizard-choice wizard-choice--wide">
+                <input type="radio" name="budget" value="Nechte mě poradit">
+                <span class="wizard-choice-box">
+                  <span class="wizard-choice-title">Nevím, poraďte mi</span>
+                  <span class="wizard-choice-desc">Domluvíme se podle rozsahu prací</span>
+                </span>
+              </label>
+            </div>
+            <div class="wizard-actions">
+              <button type="button" class="btn btn--ghost btn--dark" data-wizard-prev>← Zpět</button>
+              <button type="button" class="btn btn--primary" data-wizard-next>Pokračovat →</button>
+            </div>
+          </fieldset>
+
+          <!-- KROK 4 — Kontakt -->
+          <fieldset class="wizard-step" data-step="4">
+            <legend class="wizard-legend">
+              <span class="wizard-legend-num">04</span>
+              Jak vám máme odpovědět?
+            </legend>
+            <div class="wizard-fields">
+              <label class="wizard-field">
+                <span>Jméno *</span>
+                <input type="text" name="name" required autocomplete="name" />
+              </label>
+              <label class="wizard-field">
+                <span>E-mail *</span>
+                <input type="email" name="email" required autocomplete="email" />
+              </label>
+              <label class="wizard-field">
+                <span>Telefon</span>
+                <input type="tel" name="phone" autocomplete="tel" />
+              </label>
+              <label class="wizard-field wizard-field--wide">
+                <span>Něco navíc? (nepovinné)</span>
+                <textarea name="message" rows="4" placeholder="Rozměry prostoru, styl, který se vám líbí, cokoliv, co byste chtěl(a) sdělit."></textarea>
+              </label>
+            </div>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true" />
+            <div class="wizard-summary" data-wizard-summary></div>
+            <div class="wizard-actions">
+              <button type="button" class="btn btn--ghost btn--dark" data-wizard-prev>← Zpět</button>
+              <button type="submit" class="btn btn--primary btn--lg">Odeslat poptávku →</button>
+            </div>
+          </fieldset>
         </form>
       <% } %>
     </div>

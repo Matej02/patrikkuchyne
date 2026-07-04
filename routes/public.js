@@ -121,18 +121,30 @@ router.post('/kontakt', async (req, res) => {
   const name = (req.body.name || '').trim();
   const email = (req.body.email || '').trim();
   const phone = (req.body.phone || '').trim();
-  const message = (req.body.message || '').trim();
-  // honeypot: pole 'website' — bot ho vyplní, člověk ne
+  const extraMessage = (req.body.message || '').trim();
+  const plan = (req.body.plan || '').trim();
+  const term = (req.body.term || '').trim();
+  const budget = (req.body.budget || '').trim();
+
+  // honeypot
   if ((req.body.website || '').trim() !== '') {
     return res.render('kontakt', { title: 'Kontakt — Kuchyně Cíhovský', sent: true, error: null });
   }
-  if (!name || !email || !message) {
+  if (!name || !email) {
     return res.render('kontakt', {
       title: 'Kontakt — Kuchyně Cíhovský',
       sent: false,
-      error: 'Vyplňte prosím všechna povinná pole.'
+      error: 'Vyplňte prosím jméno a e-mail.'
     });
   }
+
+  // Sestavit strukturovanou zprávu z wizardu
+  const parts = [];
+  if (plan) parts.push(`Co plánuje: ${plan}`);
+  if (term) parts.push(`Termín: ${term}`);
+  if (budget) parts.push(`Rozpočet: ${budget}`);
+  if (extraMessage) parts.push('\nVzkaz:\n' + extraMessage);
+  const message = parts.join('\n') || extraMessage || '(bez zprávy)';
 
   db.prepare(`
     INSERT INTO messages (name, email, phone, message) VALUES (?, ?, ?, ?)
@@ -142,7 +154,6 @@ router.post('/kontakt', async (req, res) => {
     await sendContactMail({ name, email, phone, message });
   } catch (err) {
     console.error('Odeslání e-mailu selhalo:', err.message);
-    // Zpráva je uložená v DB — uživateli neříkáme, že selhal e-mail
   }
 
   res.render('kontakt', { title: 'Kontakt — Kuchyně Cíhovský', sent: true, error: null });

@@ -216,6 +216,63 @@
   </div>
 </section>
 
+<!-- ═══════════════ 3D VIZUALIZACE ═══════════════ -->
+<section class="section threedee-section">
+  <div class="container">
+    <div class="threedee-grid">
+      <div class="threedee-visual">
+        <div class="threedee-badge">
+          <span class="threedee-badge-num">3D</span>
+          <span class="threedee-badge-txt">vizualizace</span>
+        </div>
+        <div class="threedee-frame">
+          <div class="threedee-frame-inner">
+            <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="td-grad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#8b5a2b" stop-opacity=".22"/>
+                  <stop offset="100%" stop-color="#a66d33" stop-opacity=".08"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 60 L200 0 L400 60 L400 260 L0 260 Z" fill="url(#td-grad)"/>
+              <g fill="none" stroke="#a66d33" stroke-width="1.2" opacity=".8">
+                <path d="M0 60 L200 0 L400 60"/>
+                <path d="M60 90 L60 260"/>
+                <path d="M140 70 L140 260"/>
+                <path d="M260 70 L260 260"/>
+                <path d="M340 90 L340 260"/>
+                <path d="M0 140 L400 140" stroke-dasharray="4 4"/>
+                <path d="M0 200 L400 200" stroke-dasharray="4 4"/>
+                <rect x="80" y="150" width="60" height="50" opacity=".5"/>
+                <rect x="160" y="140" width="80" height="60" opacity=".7"/>
+                <rect x="260" y="150" width="60" height="50" opacity=".5"/>
+              </g>
+              <g stroke="#f7ecd4" stroke-width="2" fill="#f7ecd4" opacity=".7">
+                <circle cx="200" cy="130" r="3"/>
+                <circle cx="80" cy="180" r="2"/>
+                <circle cx="320" cy="180" r="2"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="threedee-content">
+        <span class="eyebrow">Bonus zdarma</span>
+        <h2 class="display-mega">
+          Vaše kuchyň<br>ještě před<br><em>první</em> deskou.
+        </h2>
+        <p class="threedee-lead">Ke každé zakázce dostanete <strong>3D vizualizaci zdarma</strong>. Uvidíte vaši budoucí kuchyň ze všech úhlů, barvy, materiály, kování — dřív než začneme řezat první díl.</p>
+        <ul class="threedee-list">
+          <li><span class="threedee-check">✓</span>Realistický 3D model do 7 dnů od zaměření</li>
+          <li><span class="threedee-check">✓</span>Neomezené úpravy, dokud nebudete spokojení</li>
+          <li><span class="threedee-check">✓</span>Zdarma i když si kuchyň nakonec nevezmete</li>
+        </ul>
+        <a href="/kontakt" class="btn btn--primary btn--lg">Chci 3D návrh →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════ 6) BEFORE / AFTER SLIDER ═══════════════ -->
 <section class="section ba-section">
   <div class="container">
@@ -361,6 +418,94 @@
       <div class="cta-banner-phone">
         <span>nebo zavolejte</span>
         <a href="tel:<%= contact.phone.replace(/\s/g, '') %>"><%= contact.phone %></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section class="section faq-section">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-head">
+        <span class="eyebrow">09 / Časté dotazy</span>
+        <h2 class="display-mega">Než se<br>zeptáte —<br>možná<br><em>odpovídáme</em>.</h2>
+        <p class="section-lead">Nenašli jste odpověď? Napište nám. Odpovídáme obvykle do jednoho pracovního dne.</p>
+        <a href="/kontakt" class="btn btn--ghost btn--dark" style="margin-top:24px">Zeptat se osobně →</a>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>
+            <span>Jak dlouho trvá výroba kuchyně?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Od odsouhlasení návrhu 6–10 týdnů podle složitosti a dodavatelů (spotřebiče, kámen). Termín potvrzujeme písemně před uzavřením smlouvy — a držíme se ho.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            <span>Kolik stojí kuchyň na míru?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Základní kuchyň v malém bytě začíná okolo <strong>90 000 Kč</strong>. Střední třída (dýhy, kvalitní kování, indukce) obvykle <strong>180–300 000 Kč</strong>. Nadstandard s masivem, kamennou deskou a ostrůvkem od <strong>350 000 Kč</strong>. Přesnou cenu dostanete po zaměření — konzultace zdarma.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            <span>Je zaměření a návrh zdarma?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Ano. První konzultace, zaměření na místě, 3D vizualizace i cenová nabídka jsou <strong>zcela zdarma</strong> a nezávazné. Neplatíte, dokud nepodepíšeme smlouvu.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            <span>Jaké materiály používáte?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Masiv (dub, buk, jasan), kvalitní dýhy, MDF s lakovaným povrchem, HPL, dekory Egger a Kronospan. Pracovní desky z laminátu, kompozitů (Silestone, Dekton) nebo přírodního kamene. Kování Blum s doživotní zárukou. Bez laciných zkratek.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            <span>Co je součástí ceny?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Výroba, doprava, montáž, odvoz starého nábytku, úklid po montáži a roční pozáruční kontrola. Spotřebiče si můžete pořídit sami nebo přes nás — poradíme s výběrem podle vaší dispozice.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            <span>Jaká je záruka?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Na výrobu <strong>5 let</strong>, na kování Blum <strong>doživotní</strong>. Servis provádíme sami. Pokud potřebujete něco doladit i po 10 letech, přijedeme.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            <span>Vyrábíte i mimo Prahu/Středočeský kraj?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Ano, jezdíme po celé ČR. Doprava a montáž mimo Prahu se řeší individuálně — obvykle je součástí ceny bez příplatku, u vzdálenějších lokalit se doplácí jen doprava.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            <span>Můžu si během výroby něco změnit?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Do zahájení výroby ano bez příplatku. Během výroby v rámci možností — něčeho už koupeno, něčeho ne. Vždy vám řekneme, co to znamená pro cenu a termín, a čekáme na váš souhlas.</p>
+          </div>
+        </details>
       </div>
     </div>
   </div>
