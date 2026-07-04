@@ -5,9 +5,7 @@
 <!-- ═══════════════ 1) CINEMATIC HERO ═══════════════ -->
 <section class="hero-cinematic">
   <div class="hero-bg" aria-hidden="true">
-    <% if (featured && featured[0]) { %>
-      <img src="/uploads/<%= featured[0].filename %>" alt="" class="hero-bg-img" />
-    <% } %>
+    <img src="/uploads/real-06.jpg" alt="" class="hero-bg-img" onerror="this.style.display='none'" />
     <div class="hero-bg-overlay"></div>
     <div class="hero-bg-noise"></div>
   </div>
@@ -222,39 +220,13 @@
   <div class="container">
     <div class="threedee-grid">
       <div class="threedee-visual">
+        <img src="/uploads/real-04.jpg" alt="Kuchyň s ostrůvkem a masivní pracovní deskou" class="threedee-visual-img" />
         <div class="threedee-badge">
           <span class="threedee-badge-num">3D</span>
           <span class="threedee-badge-txt">vizualizace</span>
         </div>
-        <div class="threedee-frame">
-          <div class="threedee-frame-inner">
-            <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="td-grad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#8b5a2b" stop-opacity=".22"/>
-                  <stop offset="100%" stop-color="#a66d33" stop-opacity=".08"/>
-                </linearGradient>
-              </defs>
-              <path d="M0 60 L200 0 L400 60 L400 260 L0 260 Z" fill="url(#td-grad)"/>
-              <g fill="none" stroke="#a66d33" stroke-width="1.2" opacity=".8">
-                <path d="M0 60 L200 0 L400 60"/>
-                <path d="M60 90 L60 260"/>
-                <path d="M140 70 L140 260"/>
-                <path d="M260 70 L260 260"/>
-                <path d="M340 90 L340 260"/>
-                <path d="M0 140 L400 140" stroke-dasharray="4 4"/>
-                <path d="M0 200 L400 200" stroke-dasharray="4 4"/>
-                <rect x="80" y="150" width="60" height="50" opacity=".5"/>
-                <rect x="160" y="140" width="80" height="60" opacity=".7"/>
-                <rect x="260" y="150" width="60" height="50" opacity=".5"/>
-              </g>
-              <g stroke="#f7ecd4" stroke-width="2" fill="#f7ecd4" opacity=".7">
-                <circle cx="200" cy="130" r="3"/>
-                <circle cx="80" cy="180" r="2"/>
-                <circle cx="320" cy="180" r="2"/>
-              </g>
-            </svg>
-          </div>
+        <div class="threedee-caption">
+          <small>Realizace, která začala 3D návrhem</small>
         </div>
       </div>
       <div class="threedee-content">
@@ -278,19 +250,19 @@
 <section class="section ba-section">
   <div class="container">
     <div class="section-head-mega section-head-center">
-      <span class="eyebrow">04 / Před & Po</span>
-      <h2 class="display-mega">Z <em>představy</em><br>do <em>reality</em>.</h2>
-      <p class="section-lead">Přetáhněte posuvník uprostřed obrázku. Uvidíte, jak se z vaší kuchyně stane kuchyně naše.</p>
+      <span class="eyebrow">04 / Světlá nebo tmavá?</span>
+      <h2 class="display-mega">Který styl<br>je <em>váš</em>?</h2>
+      <p class="section-lead">Přetáhněte posuvník uprostřed. Vidíte dvě naše realizace — jedna světlá a jedna tmavá. Kterou byste chtěli u sebe doma?</p>
     </div>
 
     <div class="ba-slider" data-ba-slider>
       <div class="ba-before">
-        <img src="/uploads/<%= (featured && featured[4]) ? featured[4].thumb_filename : 'demo-01.jpg' %>" alt="Prázdný prostor" />
-        <span class="ba-label ba-label--before">Prázdný prostor</span>
+        <img src="/uploads/real-05.jpg" alt="Světlá kuchyň" />
+        <span class="ba-label ba-label--before">Světlá — real. Praha</span>
       </div>
       <div class="ba-after">
-        <img src="/uploads/<%= (featured && featured[5]) ? featured[5].thumb_filename : 'demo-02.jpg' %>" alt="Hotová kuchyň" />
-        <span class="ba-label ba-label--after">Hotová kuchyň</span>
+        <img src="/uploads/real-06.jpg" alt="Tmavá kuchyň" />
+        <span class="ba-label ba-label--after">Tmavá — real. Brno</span>
       </div>
       <div class="ba-handle" data-ba-handle>
         <div class="ba-handle-circle">
