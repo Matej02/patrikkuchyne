@@ -1,8 +1,8 @@
-<header class="site-header">
-  <div class="container header-inner">
+<header class="site-header" id="site-header">
+  <div class="header-inner">
     <a class="brand" href="/">
       <span class="brand-mark">C</span>
-      <span class="brand-name">Cíhovský<span class="brand-sub">/ kuchyně</span></span>
+      <span class="brand-name">Cíhovský<span class="brand-sub">/ řemeslo od 1998</span></span>
     </a>
     <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -14,5 +14,11 @@
       <a href="/o-nas" class="<%= path === '/o-nas' ? 'is-active' : '' %>">O nás</a>
       <a href="/kontakt" class="<%= path === '/kontakt' ? 'is-active' : '' %>">Kontakt</a>
     </nav>
+    <a href="/kontakt" class="header-cta">Nezávazná poptávka →</a>
   </div>
 </header>
+
+<a href="/kontakt" class="floating-cta" aria-label="Poptat">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span>Poptat</span>
+</a>

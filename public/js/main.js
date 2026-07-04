@@ -1,7 +1,22 @@
 (function () {
   'use strict';
 
-  // ── Mobile menu ────────────────────────────────────────────────
+  // ── LOADED CLASS (spustí hero animace) ─────────────────────────
+  requestAnimationFrame(() => {
+    document.body.classList.add('is-loaded');
+  });
+
+  // ── STICKY HEADER — přidá class po scroll ──────────────────────
+  const header = document.getElementById('site-header');
+  if (header) {
+    const onScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 20);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ── MOBILE MENU ────────────────────────────────────────────────
   const menuToggle = document.querySelector('.menu-toggle');
   const siteNav = document.querySelector('.site-nav');
   if (menuToggle && siteNav) {
@@ -10,9 +25,189 @@
       menuToggle.classList.toggle('is-open', open);
       menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+    siteNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        siteNav.classList.remove('is-open');
+        menuToggle.classList.remove('is-open');
+      });
+    });
   }
 
-  // ── Lightbox ───────────────────────────────────────────────────
+  // ── REVEAL ON SCROLL ───────────────────────────────────────────
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+    document.querySelectorAll('[data-reveal], .timeline-step, .testimonial').forEach(el => io.observe(el));
+  }
+
+  // ── ANIMATED COUNTERS ──────────────────────────────────────────
+  const counterItems = document.querySelectorAll('[data-counter]');
+  if (counterItems.length && 'IntersectionObserver' in window) {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.counter, 10) || 0;
+        const numEl = el.querySelector('.counter-num');
+        if (!numEl) return;
+        const duration = 1800;
+        const start = performance.now();
+        const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+        function step(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const value = Math.round(target * easeOut(progress));
+          numEl.textContent = value;
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    counterItems.forEach(el => counterObserver.observe(el));
+  }
+
+  // ── HORIZONTAL SCROLL BUTTONS ──────────────────────────────────
+  const hscrollTrack = document.querySelector('[data-hscroll]');
+  const hscrollPrev = document.querySelector('[data-hscroll-prev]');
+  const hscrollNext = document.querySelector('[data-hscroll-next]');
+  if (hscrollTrack && hscrollPrev && hscrollNext) {
+    const scrollBy = () => {
+      const card = hscrollTrack.querySelector('.hscroll-card');
+      return card ? card.getBoundingClientRect().width + 20 : 400;
+    };
+    hscrollPrev.addEventListener('click', () => {
+      hscrollTrack.scrollBy({ left: -scrollBy(), behavior: 'smooth' });
+    });
+    hscrollNext.addEventListener('click', () => {
+      hscrollTrack.scrollBy({ left: scrollBy(), behavior: 'smooth' });
+    });
+
+    // Drag-to-scroll (desktop only, not touch)
+    let isDown = false, startX = 0, scrollStart = 0;
+    hscrollTrack.addEventListener('mousedown', (e) => {
+      if (e.target.closest('a')) return;
+      isDown = true;
+      hscrollTrack.style.cursor = 'grabbing';
+      startX = e.pageX;
+      scrollStart = hscrollTrack.scrollLeft;
+      e.preventDefault();
+    });
+    ['mouseup', 'mouseleave'].forEach(evt => {
+      hscrollTrack.addEventListener(evt, () => {
+        isDown = false;
+        hscrollTrack.style.cursor = '';
+      });
+    });
+    hscrollTrack.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const dx = e.pageX - startX;
+      hscrollTrack.scrollLeft = scrollStart - dx;
+    });
+  }
+
+  // ── BEFORE / AFTER SLIDER ──────────────────────────────────────
+  const baSlider = document.querySelector('[data-ba-slider]');
+  if (baSlider) {
+    const after = baSlider.querySelector('.ba-after');
+    const handle = baSlider.querySelector('[data-ba-handle]');
+    let dragging = false;
+
+    function setPos(clientX) {
+      const rect = baSlider.getBoundingClientRect();
+      let x = clientX - rect.left;
+      x = Math.max(0, Math.min(x, rect.width));
+      const pct = (x / rect.width) * 100;
+      after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      handle.style.left = `${pct}%`;
+    }
+
+    baSlider.addEventListener('mousedown', (e) => {
+      dragging = true;
+      setPos(e.clientX);
+    });
+    baSlider.addEventListener('touchstart', (e) => {
+      dragging = true;
+      setPos(e.touches[0].clientX);
+    }, { passive: true });
+
+    window.addEventListener('mousemove', (e) => {
+      if (dragging) setPos(e.clientX);
+    });
+    window.addEventListener('touchmove', (e) => {
+      if (dragging) setPos(e.touches[0].clientX);
+    }, { passive: true });
+
+    ['mouseup', 'touchend'].forEach(evt => {
+      window.addEventListener(evt, () => { dragging = false; });
+    });
+
+    // Auto-demo animace prvních 2 sekund
+    let demo = true;
+    const rect = baSlider.getBoundingClientRect();
+    let t0 = null;
+    function demoFrame(t) {
+      if (!demo) return;
+      if (!t0) t0 = t;
+      const elapsed = t - t0;
+      const cycle = 3000;
+      const p = (elapsed % cycle) / cycle;
+      const pct = 30 + 40 * Math.sin(p * Math.PI * 2);
+      after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      handle.style.left = `${pct}%`;
+      if (elapsed < 2500) requestAnimationFrame(demoFrame);
+    }
+    // Start demo when slider is visible
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            requestAnimationFrame(demoFrame);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      io.observe(baSlider);
+    }
+    baSlider.addEventListener('mousedown', () => { demo = false; });
+    baSlider.addEventListener('touchstart', () => { demo = false; }, { passive: true });
+  }
+
+  // ── PARALLAX na CTA banner background ──────────────────────────
+  const ctaBg = document.querySelector('.cta-banner-bg img');
+  if (ctaBg) {
+    const banner = document.querySelector('.cta-banner');
+    let ticking = false;
+    function updateParallax() {
+      const rect = banner.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      if (rect.bottom < 0 || rect.top > viewportH) {
+        ticking = false;
+        return;
+      }
+      const progress = (viewportH - rect.top) / (viewportH + rect.height);
+      const translateY = (progress - 0.5) * 100;
+      ctaBg.style.transform = `translateY(${translateY}px)`;
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  // ── LIGHTBOX ───────────────────────────────────────────────────
   const items = Array.from(document.querySelectorAll('[data-lightbox]'));
   if (items.length === 0) return;
 
@@ -67,14 +262,4 @@
     if (e.key === 'ArrowLeft') open(index - 1);
     if (e.key === 'ArrowRight') open(index + 1);
   });
-
-  // ── Reveal on scroll ───────────────────────────────────────────
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.section-head, .service-card, .value, .process li').forEach(el => io.observe(el));
-  }
 })();

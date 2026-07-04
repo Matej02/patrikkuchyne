@@ -26,7 +26,7 @@
 
     <% if (photos.length === 0) { %>
       <div class="empty-hero">
-        <p>V této sekci zatím nejsou žádné fotografie. Sledujte nás — brzy je doplníme.</p>
+        <p>V této sekci zatím nejsou žádné fotografie.</p>
         <% if (activeCategory) { %>
           <a class="btn btn--ghost btn--dark" href="<%= baseUrl %>">← Zpět na všechny</a>
         <% } %>
@@ -51,13 +51,22 @@
   </div>
 </section>
 
-<section class="section section--accent">
-  <div class="container cta-band">
-    <div>
-      <span class="eyebrow eyebrow--dark">Máte konkrétní představu?</span>
-      <h2 class="display">Napište nám.</h2>
+<section class="cta-banner">
+  <div class="cta-banner-bg" aria-hidden="true">
+    <% if (photos && photos[0]) { %>
+      <img src="/uploads/<%= photos[0].filename %>" alt="" />
+    <% } %>
+  </div>
+  <div class="container cta-banner-content">
+    <span class="eyebrow eyebrow--light">Máte konkrétní představu?</span>
+    <h2 class="display-huge">Pojďme se <em>bavit</em>.</h2>
+    <div class="cta-banner-actions">
+      <a href="/kontakt" class="btn btn--primary btn--xl">Nezávazná konzultace</a>
+      <div class="cta-banner-phone">
+        <span>nebo zavolejte</span>
+        <a href="tel:<%= contact.phone.replace(/\s/g, '') %>"><%= contact.phone %></a>
+      </div>
     </div>
-    <a href="/kontakt" class="btn btn--primary btn--lg">Nezávazná konzultace →</a>
   </div>
 </section>
 

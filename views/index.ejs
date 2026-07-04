@@ -1,125 +1,401 @@
 <%- include('partials/head') %>
-<body class="page-home">
+<body class="page-home" data-scroll="0">
 <%- include('partials/header') %>
 
-<section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-eyebrow">— Řemeslo od roku 1998</div>
-    <h1 class="hero-title">
-      Kuchyně, které<br>
-      <em>přetrvají</em><br>
-      generace.
+<!-- ═══════════════ 1) CINEMATIC HERO ═══════════════ -->
+<section class="hero-cinematic">
+  <div class="hero-bg" aria-hidden="true">
+    <% if (featured && featured[0]) { %>
+      <img src="/uploads/<%= featured[0].filename %>" alt="" class="hero-bg-img" />
+    <% } %>
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-bg-noise"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-reveal>
+      <span class="hero-line"></span>
+      <span>Rodinná dílna od roku 1998</span>
+    </div>
+    <h1 class="hero-title-cinematic" data-reveal>
+      <span class="hero-word">Kuchyně,</span>
+      <span class="hero-word">které <em>přetrvají</em></span>
+      <span class="hero-word">generace.</span>
     </h1>
-    <p class="hero-lead">
-      Rodinná dílna, dvacet pět let zkušeností a stovky spokojených domácností.
-      Kuchyně a nábytek na míru — od prvního zaměření po poslední pant.
+    <p class="hero-lead-cinematic" data-reveal>
+      Nejsme továrna. Jsme dílna, kde vzniká&nbsp;kus vaší domácnosti — ruční prací a materiály, které stárnou hezky.
     </p>
-    <div class="hero-cta">
-      <a href="/kuchyne" class="btn btn--primary">Prohlédnout kuchyně</a>
-      <a href="/kontakt" class="btn btn--ghost">Nezávazná konzultace →</a>
+    <div class="hero-cta-cinematic" data-reveal>
+      <a href="/kuchyne" class="btn btn--primary btn--lg">
+        <span>Prohlédnout realizace</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="/kontakt" class="btn-text-cta">
+        <span>Nezávazná konzultace</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </div>
-  <div class="hero-numbers">
-    <div><strong>25+</strong><span>let zkušeností</span></div>
-    <div><strong>400+</strong><span>realizací</span></div>
-    <div><strong>100%</strong><span>na míru</span></div>
+
+  <div class="hero-scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<section class="section">
+<!-- ═══════════════ 2) MARQUEE STRIP ═══════════════ -->
+<section class="marquee-section" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Ruční výroba</span><span class="marquee-dot">●</span>
+    <span>Od 1998</span><span class="marquee-dot">●</span>
+    <span>Kuchyně na míru</span><span class="marquee-dot">●</span>
+    <span>Dveře</span><span class="marquee-dot">●</span>
+    <span>Vestavěné skříně</span><span class="marquee-dot">●</span>
+    <span>Nábytek</span><span class="marquee-dot">●</span>
+    <span>Ruční výroba</span><span class="marquee-dot">●</span>
+    <span>Od 1998</span><span class="marquee-dot">●</span>
+    <span>Kuchyně na míru</span><span class="marquee-dot">●</span>
+    <span>Dveře</span><span class="marquee-dot">●</span>
+    <span>Vestavěné skříně</span><span class="marquee-dot">●</span>
+    <span>Nábytek</span><span class="marquee-dot">●</span>
+  </div>
+</section>
+
+<!-- ═══════════════ 3) 4 KATEGORIE S HOVER REVEAL ═══════════════ -->
+<section class="section categories-section">
   <div class="container">
-    <div class="section-head section-head--split">
-      <div>
-        <span class="eyebrow">01 / Náš příběh</span>
-        <h2 class="display">Dílna, kde vzniká<br>kus vaší domácnosti.</h2>
-      </div>
+    <div class="section-head-mega">
+      <span class="eyebrow">01 / Co vyrábíme</span>
+      <h2 class="display-mega">
+        Čtyři světy<br>jednoho <em>řemesla</em>.
+      </h2>
+      <p class="section-lead">Vyberte styl. Klikněte. Prohlédněte si vše, co jsme v této kategorii vyrobili.</p>
     </div>
-    <div class="story-grid">
-      <div class="story-text">
-        <p class="lead-p">Táta začal v roce 1998 v malé garáži s jedním hoblíkem, jednou frézkou a
-        představou, že kuchyně nemá být jen skládaná krabice, ale kus nábytku, který přežije děti,
-        vnoučata a několik rekonstrukcí bytu.</p>
-        <p>Za tu dobu jsme z garáže vyrostli do plnohodnotné dílny, ale způsob práce jsme si nechali stejný.
-        Chodíme zaměřit, posloucháme, kreslíme. Vyrábíme sami — od korpusu po pant. Kontrolujeme každou hranu.
-        A když je něco potřeba doladit i po letech, přijedeme.</p>
-        <p>Nejsme továrna. Jsme dílna, která ví, komu co odchází.</p>
+
+    <div class="categories-grid">
+      <a class="cat-tile" href="/kuchyne/moderni" data-reveal>
+        <% if (featured && featured[1]) { %>
+          <img src="/uploads/<%= featured[1].thumb_filename || featured[1].filename %>" alt="Moderní kuchyně" />
+        <% } %>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-content">
+          <span class="cat-tile-num">01</span>
+          <h3 class="cat-tile-title">Moderní<br>kuchyně</h3>
+          <p class="cat-tile-desc">Čisté linie, matné povrchy, integrované spotřebiče. Kuchyně pro rok 2026.</p>
+          <span class="cat-tile-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="cat-tile" href="/kuchyne/rustikalni" data-reveal>
+        <% if (featured && featured[2]) { %>
+          <img src="/uploads/<%= featured[2].thumb_filename || featured[2].filename %>" alt="Rustikální kuchyně" />
+        <% } %>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-content">
+          <span class="cat-tile-num">02</span>
+          <h3 class="cat-tile-title">Rustikální<br>kuchyně</h3>
+          <p class="cat-tile-desc">Masiv, ruční patina, tradiční detaily. Kuchyně jako vzpomínka na babiččin dům.</p>
+          <span class="cat-tile-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="cat-tile" href="/kuchyne/ostruvkove" data-reveal>
+        <% if (featured && featured[3]) { %>
+          <img src="/uploads/<%= featured[3].thumb_filename || featured[3].filename %>" alt="Ostrůvkové kuchyně" />
+        <% } %>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-content">
+          <span class="cat-tile-num">03</span>
+          <h3 class="cat-tile-title">Ostrůvkové<br>kuchyně</h3>
+          <p class="cat-tile-desc">Srdce otevřeného prostoru. Bar, dřez, varný ostrůvek — místo, kde se rodina sejde.</p>
+          <span class="cat-tile-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="cat-tile" href="/dale-nabizime" data-reveal>
+        <% if (featured && featured[7]) { %>
+          <img src="/uploads/<%= featured[7].thumb_filename || featured[7].filename %>" alt="Dveře, skříně, nábytek" />
+        <% } %>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-content">
+          <span class="cat-tile-num">04</span>
+          <h3 class="cat-tile-title">Dveře,<br>skříně, nábytek</h3>
+          <p class="cat-tile-desc">Když si oblíbíte naši práci u kuchyně, nezůstane u ní. Vyrobíme cokoli ze dřeva.</p>
+          <span class="cat-tile-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 4) NÁŠ PŘÍBĚH + POČÍTADLA ═══════════════ -->
+<section class="section story-section">
+  <div class="container">
+    <div class="story-layout">
+      <div class="story-left">
+        <span class="eyebrow">02 / Náš příběh</span>
+        <h2 class="display-mega">
+          Jedna dílna.<br>
+          Tři generace.<br>
+          <em>Nespočet</em> kuchyní.
+        </h2>
+        <p class="story-p story-p--big">
+          Táta začal v roce 1998 v malé garáži s jedním hoblíkem
+          a představou, že kuchyně nemá být jen skládaná krabice.
+        </p>
+        <p class="story-p">
+          Za dvě desítky let jsme z garáže vyrostli, ale způsob práce jsme si nechali stejný.
+          Chodíme zaměřit. Posloucháme. Kreslíme. Vyrábíme sami — od korpusu po pant.
+          A když je něco potřeba doladit i po letech, přijedeme.
+        </p>
+        <a href="/o-nas" class="btn btn--ghost btn--dark">Přečíst celý příběh →</a>
       </div>
-      <div class="story-side">
-        <div class="badge-stack">
-          <div class="badge-item"><strong>1998</strong><span>Založení dílny</span></div>
-          <div class="badge-item"><strong>2005</strong><span>Přestěhování do vlastního provozu</span></div>
-          <div class="badge-item"><strong>2015</strong><span>Rozšíření o výrobu dveří a skříní</span></div>
-          <div class="badge-item"><strong>Dnes</strong><span>400+ realizací po celé ČR</span></div>
+
+      <div class="story-right">
+        <div class="counter-grid">
+          <div class="counter-item" data-counter="25">
+            <strong class="counter-num">0</strong>
+            <span class="counter-plus">+</span>
+            <span class="counter-label">let zkušeností</span>
+          </div>
+          <div class="counter-item" data-counter="400">
+            <strong class="counter-num">0</strong>
+            <span class="counter-plus">+</span>
+            <span class="counter-label">realizací</span>
+          </div>
+          <div class="counter-item" data-counter="100">
+            <strong class="counter-num">0</strong>
+            <span class="counter-percent">%</span>
+            <span class="counter-label">na míru</span>
+          </div>
+          <div class="counter-item" data-counter="60">
+            <strong class="counter-num">0</strong>
+            <span class="counter-plus">+</span>
+            <span class="counter-label">měsíců záruky</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section--dark">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">02 / Co vyrábíme</span>
-      <h2 class="display">Kuchyně jsou srdce dílny.<br>Ale nezůstáváme u nich.</h2>
+<!-- ═══════════════ 5) HORIZONTÁLNÍ SCROLL GALERIE ═══════════════ -->
+<section class="section-dark hscroll-section">
+  <div class="container hscroll-head">
+    <div>
+      <span class="eyebrow eyebrow--accent">03 / Poslední z dílny</span>
+      <h2 class="display-mega">Realizace, které<br><em>promlouvají</em>.</h2>
     </div>
-    <div class="offer-split">
-      <a class="offer-card offer-card--primary" href="/kuchyne">
-        <span class="offer-num">01</span>
-        <h3>Kuchyně na míru</h3>
-        <p>Naše hlavní řemeslo. Moderní, rustikální i ostrůvkové sestavy — vždy ušité vašemu prostoru.</p>
-        <span class="offer-cta">Prohlédnout galerii →</span>
+    <div class="hscroll-controls">
+      <button class="hscroll-btn" data-hscroll-prev aria-label="Předchozí">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="hscroll-btn" data-hscroll-next aria-label="Další">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="hscroll-track" data-hscroll>
+    <% (featured || []).forEach(function(p, idx){ %>
+      <a class="hscroll-card" href="/uploads/<%= p.filename %>" data-lightbox
+         data-title="<%= p.title || '' %>" data-desc="<%= p.description || '' %>">
+        <div class="hscroll-card-img">
+          <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="<%= p.title || 'Realizace' %>" loading="lazy" />
+        </div>
+        <div class="hscroll-card-meta">
+          <span class="hscroll-card-num"><%= String(idx + 1).padStart(2, '0') %></span>
+          <div>
+            <% if (p.cat_name) { %><span class="tag tag--accent"><%= p.cat_name %></span><% } %>
+            <strong><%= p.title || 'Realizace' %></strong>
+          </div>
+        </div>
       </a>
-      <a class="offer-card" href="/dale-nabizime">
-        <span class="offer-num">02</span>
-        <h3>Dále nabízíme</h3>
-        <p>Interiérové dveře, vestavěné skříně, nábytek na míru. Vše ze stejné dílny, stejnou rukou.</p>
-        <span class="offer-cta">Co ještě děláme →</span>
-      </a>
+    <% }); %>
+    <a class="hscroll-card hscroll-card--last" href="/kuchyne">
+      <div class="hscroll-card-more">
+        <span>Vidět<br>všechny →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════ 6) BEFORE / AFTER SLIDER ═══════════════ -->
+<section class="section ba-section">
+  <div class="container">
+    <div class="section-head-mega section-head-center">
+      <span class="eyebrow">04 / Před & Po</span>
+      <h2 class="display-mega">Z <em>představy</em><br>do <em>reality</em>.</h2>
+      <p class="section-lead">Přetáhněte posuvník uprostřed obrázku. Uvidíte, jak se z vaší kuchyně stane kuchyně naše.</p>
+    </div>
+
+    <div class="ba-slider" data-ba-slider>
+      <div class="ba-before">
+        <img src="/uploads/<%= (featured && featured[4]) ? featured[4].thumb_filename : 'demo-01.jpg' %>" alt="Prázdný prostor" />
+        <span class="ba-label ba-label--before">Prázdný prostor</span>
+      </div>
+      <div class="ba-after">
+        <img src="/uploads/<%= (featured && featured[5]) ? featured[5].thumb_filename : 'demo-02.jpg' %>" alt="Hotová kuchyň" />
+        <span class="ba-label ba-label--after">Hotová kuchyň</span>
+      </div>
+      <div class="ba-handle" data-ba-handle>
+        <div class="ba-handle-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3L4 7l4 4M16 21l4-4-4-4M4 7h16M20 17H4"/></svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<!-- ═══════════════ 7) PROCES / TIMELINE ═══════════════ -->
+<section class="section-dark process-section">
   <div class="container">
-    <div class="section-head section-head--split">
-      <div>
-        <span class="eyebrow">03 / Poslední práce</span>
-        <h2 class="display">Z dílny nedávno.</h2>
-      </div>
-      <a href="/kuchyne" class="btn btn--ghost btn--dark">Všechny realizace →</a>
+    <div class="section-head-mega">
+      <span class="eyebrow eyebrow--accent">05 / Jak spolu pracujeme</span>
+      <h2 class="display-mega">Šest kroků<br>k <em>hotové</em> kuchyni.</h2>
     </div>
 
-    <% if (featured.length === 0) { %>
-      <div class="empty-hero">
-        <p>Galerie se právě plní. Brzy tu najdete naše nejnovější realizace.</p>
+    <div class="timeline">
+      <div class="timeline-line"></div>
+      <div class="timeline-step" data-reveal>
+        <div class="timeline-dot"><span>01</span></div>
+        <div class="timeline-body">
+          <h3>Konzultace</h3>
+          <p>Ozvete se — telefonicky, e-mailem, nebo přes formulář. Probereme prostor, rozpočet, představu.</p>
+          <span class="timeline-time">— 30 minut</span>
+        </div>
       </div>
-    <% } else { %>
-      <div class="masonry">
-        <% featured.forEach(function(p){ %>
-          <a class="masonry-item" href="/uploads/<%= p.filename %>" data-lightbox
-             data-title="<%= p.title || '' %>" data-desc="<%= p.description || '' %>">
-            <img src="/uploads/<%= p.thumb_filename || p.filename %>"
-                 alt="<%= p.title || 'Realizace' %>" loading="lazy" />
-            <% if (p.title || p.cat_name) { %>
-              <div class="masonry-caption">
-                <% if (p.cat_name) { %><span class="tag"><%= p.cat_name %></span><% } %>
-                <% if (p.title) { %><strong><%= p.title %></strong><% } %>
-              </div>
-            <% } %>
-          </a>
-        <% }); %>
+      <div class="timeline-step" data-reveal>
+        <div class="timeline-dot"><span>02</span></div>
+        <div class="timeline-body">
+          <h3>Zaměření</h3>
+          <p>Přijedeme k vám. Změříme na milimetry. Poradíme s dispozicí, materiály, spotřebiči.</p>
+          <span class="timeline-time">— 1–2 hodiny</span>
+        </div>
       </div>
+      <div class="timeline-step" data-reveal>
+        <div class="timeline-dot"><span>03</span></div>
+        <div class="timeline-body">
+          <h3>Návrh a 3D vizualizace</h3>
+          <p>Připravíme půdorys, 3D vizualizaci a přesnou cenovou nabídku. Nic není povinné — konzultace je nezávazná.</p>
+          <span class="timeline-time">— 7–10 dní</span>
+        </div>
+      </div>
+      <div class="timeline-step" data-reveal>
+        <div class="timeline-dot"><span>04</span></div>
+        <div class="timeline-body">
+          <h3>Výroba v dílně</h3>
+          <p>V naší dílně vyrábíme přesně to, co jste odsouhlasili. Ručně kontrolujeme každý díl.</p>
+          <span class="timeline-time">— 6–10 týdnů</span>
+        </div>
+      </div>
+      <div class="timeline-step" data-reveal>
+        <div class="timeline-dot"><span>05</span></div>
+        <div class="timeline-body">
+          <h3>Montáž u vás</h3>
+          <p>Precizní instalace, doladění detailů, úklid po sobě. Předáme čistou funkční kuchyni.</p>
+          <span class="timeline-time">— 1–3 dny</span>
+        </div>
+      </div>
+      <div class="timeline-step" data-reveal>
+        <div class="timeline-dot"><span>06</span></div>
+        <div class="timeline-body">
+          <h3>Servis a záruka</h3>
+          <p>Roční kontrola panů a spojů. A když je něco potřeba doladit i za 10 let, přijedeme.</p>
+          <span class="timeline-time">— napořád</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 8) TESTIMONIALS ═══════════════ -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="section-head-mega">
+      <span class="eyebrow">06 / Co říkají klienti</span>
+      <h2 class="display-mega">Kuchyně slouží roky.<br>Vzpomínka na <em>lidi</em>, kteří ji vyrobili, taky.</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <blockquote class="testimonial" data-reveal>
+        <span class="quote-mark">"</span>
+        <p>Kluci Cíhovští nám dělali kuchyň před osmi lety. Nedávno jsem volal, že se uvolnil jeden pant. Přijeli druhý den. To dnes nikdo nedělá.</p>
+        <footer>
+          <strong>Martin K.</strong>
+          <span>Praha 6, moderní kuchyň, 2016</span>
+        </footer>
+      </blockquote>
+      <blockquote class="testimonial testimonial--featured" data-reveal>
+        <span class="quote-mark">"</span>
+        <p>Prošli jsme tři firmy, než jsme narazili na Cíhovské. Jediní, kteří s námi seděli u kávy dvě hodiny a ptali se, jak vaříme. Zbytek nám ukazoval katalog.</p>
+        <footer>
+          <strong>Petra a Jan B.</strong>
+          <span>Beroun, rustikální kuchyň s ostrůvkem, 2023</span>
+        </footer>
+      </blockquote>
+      <blockquote class="testimonial" data-reveal>
+        <span class="quote-mark">"</span>
+        <p>Chtěli jsme dubové dveře do celého domu. Objednali jsme se s vidinou, že to bude drahé. Cenově příjemné překvapení, kvalita nadstandardní.</p>
+        <footer>
+          <strong>Tomáš V.</strong>
+          <span>Kutná Hora, dveře a šatna, 2024</span>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 9) CTA BANNER ═══════════════ -->
+<section class="cta-banner">
+  <div class="cta-banner-bg" aria-hidden="true">
+    <% if (featured && featured[6]) { %>
+      <img src="/uploads/<%= featured[6].filename %>" alt="" />
     <% } %>
   </div>
+  <div class="container cta-banner-content">
+    <span class="eyebrow eyebrow--light">07 / Začneme?</span>
+    <h2 class="display-huge">
+      Máte prostor.<br>
+      My máme <em>řemeslo</em>.<br>
+      Pojďme se bavit.
+    </h2>
+    <div class="cta-banner-actions">
+      <a href="/kontakt" class="btn btn--primary btn--xl">Nezávazná konzultace</a>
+      <div class="cta-banner-phone">
+        <span>nebo zavolejte</span>
+        <a href="tel:<%= contact.phone.replace(/\s/g, '') %>"><%= contact.phone %></a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="section section--accent">
-  <div class="container cta-band">
-    <div>
-      <span class="eyebrow eyebrow--dark">04 / Začneme?</span>
-      <h2 class="display">Máte prostor. My máme řemeslo.</h2>
+<!-- ═══════════════ 10) INSTAGRAM MOCK ═══════════════ -->
+<section class="section ig-section">
+  <div class="container">
+    <div class="section-head-mega section-head-split">
+      <div>
+        <span class="eyebrow">08 / Sledujte dílnu</span>
+        <h2 class="display-mega">Denně z dílny<br>na <em>Instagram</em>.</h2>
+      </div>
+      <% if (contact.instagram) { %>
+        <a href="<%= contact.instagram %>" target="_blank" rel="noopener" class="btn btn--ghost btn--dark">
+          @kuchyne_cihovsky →
+        </a>
+      <% } %>
     </div>
-    <a href="/kontakt" class="btn btn--primary btn--lg">Domluvit konzultaci</a>
+
+    <div class="ig-grid">
+      <% (featured || []).slice(0, 6).forEach(function(p, idx){ %>
+        <a class="ig-tile" href="/uploads/<%= p.filename %>" data-lightbox
+           data-title="<%= p.title || '' %>" data-desc="<%= p.description || '' %>">
+          <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="" loading="lazy" />
+          <div class="ig-tile-hover">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+        </a>
+      <% }); %>
+    </div>
   </div>
 </section>
 
