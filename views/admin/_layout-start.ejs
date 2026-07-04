@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> — Administrace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+<aside class="admin-sidebar">
+  <div class="admin-brand">
+    <span class="brand-mark">C</span>
+    <div>
+      <strong>Cíhovský</strong>
+      <small>administrace</small>
+    </div>
+  </div>
+  <nav class="admin-nav">
+    <a href="/admin" class="<%= path === '/admin' ? 'is-active' : '' %>"><span>◆</span>Přehled</a>
+    <a href="/admin/nahrat" class="<%= path === '/admin/nahrat' ? 'is-active' : '' %>"><span>↑</span>Nahrát fotky</a>
+    <a href="/admin/fotky" class="<%= path.startsWith('/admin/fotky') ? 'is-active' : '' %>"><span>▦</span>Fotogalerie</a>
+    <a href="/admin/kategorie" class="<%= path === '/admin/kategorie' ? 'is-active' : '' %>"><span>◫</span>Kategorie</a>
+    <a href="/admin/zpravy" class="<%= path === '/admin/zpravy' ? 'is-active' : '' %>"><span>✉</span>Zprávy</a>
+    <a href="/admin/nastaveni" class="<%= path === '/admin/nastaveni' ? 'is-active' : '' %>"><span>⚙</span>Nastavení</a>
+  </nav>
+  <div class="admin-sidebar-bottom">
+    <a href="/" target="_blank" class="admin-external">↗ Zobrazit web</a>
+    <form method="POST" action="/admin/logout">
+      <button type="submit" class="admin-logout">Odhlásit se</button>
+    </form>
+    <small class="admin-user">Přihlášen jako <strong><%= currentUser %></strong></small>
+  </div>
+</aside>
+<main class="admin-main">

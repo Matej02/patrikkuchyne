@@ -1,0 +1,83 @@
+<%- include('_layout-start') %>
+
+<header class="admin-header">
+  <div>
+    <span class="admin-eyebrow">Galerie</span>
+    <h1>Fotografie <span class="count-badge"><%= photos.length %></span></h1>
+  </div>
+  <a href="/admin/nahrat" class="btn btn--primary">↑ Nahrát další</a>
+</header>
+
+<nav class="filter-bar filter-bar--admin">
+  <a href="/admin/fotky" class="filter <%= !filter ? 'is-active' : '' %>">Vše</a>
+  <% if (categoriesKuchyne.length) { %>
+    <span class="filter-group-label">Kuchyně:</span>
+    <% categoriesKuchyne.forEach(function(cat){ %>
+      <a href="/admin/fotky?kategorie=<%= cat.slug %>"
+         class="filter <%= filter === cat.slug ? 'is-active' : '' %>"><%= cat.name %></a>
+    <% }); %>
+  <% } %>
+  <% if (categoriesOstatni.length) { %>
+    <span class="filter-group-label">Dále:</span>
+    <% categoriesOstatni.forEach(function(cat){ %>
+      <a href="/admin/fotky?kategorie=<%= cat.slug %>"
+         class="filter <%= filter === cat.slug ? 'is-active' : '' %>"><%= cat.name %></a>
+    <% }); %>
+  <% } %>
+</nav>
+
+<% if (photos.length === 0) { %>
+  <div class="admin-empty">
+    <p>Zatím žádné fotky v této kategorii.</p>
+    <a href="/admin/nahrat" class="btn btn--primary">Nahrát první fotky</a>
+  </div>
+<% } else { %>
+  <div class="photo-manage-grid">
+    <% photos.forEach(function(p){ %>
+      <details class="photo-card">
+        <summary>
+          <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="" />
+          <div class="photo-card-meta">
+            <% if (p.cat_name) { %><span class="tag tag--dark"><%= p.cat_name %></span><% } %>
+            <strong><%= p.title || 'Bez názvu' %></strong>
+            <small><%= new Date(p.created_at).toLocaleDateString('cs-CZ') %></small>
+          </div>
+        </summary>
+        <div class="photo-card-body">
+          <form method="POST" action="/admin/fotky/<%= p.id %>/upravit" class="stack">
+            <label><span>Název</span><input type="text" name="title" value="<%= p.title || '' %>" /></label>
+            <label><span>Popis</span><textarea name="description" rows="2"><%= p.description || '' %></textarea></label>
+            <label>
+              <span>Kategorie</span>
+              <select name="category_id">
+                <option value="">— žádná —</option>
+                <% if (categoriesKuchyne.length) { %>
+                  <optgroup label="Kuchyně">
+                    <% categoriesKuchyne.forEach(function(cat){ %>
+                      <option value="<%= cat.id %>" <%= p.category_id === cat.id ? 'selected' : '' %>><%= cat.name %></option>
+                    <% }); %>
+                  </optgroup>
+                <% } %>
+                <% if (categoriesOstatni.length) { %>
+                  <optgroup label="Dále nabízíme">
+                    <% categoriesOstatni.forEach(function(cat){ %>
+                      <option value="<%= cat.id %>" <%= p.category_id === cat.id ? 'selected' : '' %>><%= cat.name %></option>
+                    <% }); %>
+                  </optgroup>
+                <% } %>
+              </select>
+            </label>
+            <div class="form-actions form-actions--row">
+              <button type="submit" class="btn btn--primary btn--sm">Uložit</button>
+              <button type="button" class="btn btn--danger btn--sm"
+                      onclick="confirmDelete(<%= p.id %>)">Smazat</button>
+            </div>
+          </form>
+          <form id="delete-<%= p.id %>" method="POST" action="/admin/fotky/<%= p.id %>/smazat" style="display:none"></form>
+        </div>
+      </details>
+    <% }); %>
+  </div>
+<% } %>
+
+<%- include('_layout-end') %>

@@ -1,0 +1,80 @@
+<%- include('partials/head') %>
+<body class="page-kontakt">
+<%- include('partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Kontakt</span>
+    <h1 class="display display--xl">Pojďme se<br>bavit o vaší kuchyni.</h1>
+    <p class="page-lead">Napište nám, zavolejte nebo se stavte v naší dílně. Konzultace je nezávazná.</p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <div class="info-block">
+        <span class="eyebrow">Telefon</span>
+        <a class="big-link" href="tel:<%= contact.phone.replace(/\s/g, '') %>"><%= contact.phone %></a>
+      </div>
+      <div class="info-block">
+        <span class="eyebrow">E-mail</span>
+        <a class="big-link" href="mailto:<%= contact.email %>"><%= contact.email %></a>
+      </div>
+      <div class="info-block">
+        <span class="eyebrow">Dílna</span>
+        <p class="muted"><%= contact.address %><br><%= contact.hours %></p>
+      </div>
+      <% if (contact.instagram || contact.facebook) { %>
+        <div class="info-block">
+          <span class="eyebrow">Sledujte nás</span>
+          <div class="socials socials--dark">
+            <% if (contact.instagram) { %>
+              <a href="<%= contact.instagram %>" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+            <% } %>
+            <% if (contact.facebook) { %>
+              <a href="<%= contact.facebook %>" target="_blank" rel="noopener" aria-label="Facebook" class="social-link">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2C16.5 3.1 15.5 3 14.4 3c-2.4 0-4 1.5-4 4.2v2.6H7.7V13h2.7v8h3.1z"/></svg>
+              </a>
+            <% } %>
+          </div>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="contact-form-wrap">
+      <% if (sent) { %>
+        <div class="alert alert--success">
+          <strong>Děkujeme, zprávu jsme dostali.</strong>
+          <p>Ozveme se vám co nejdřív — obvykle do jednoho pracovního dne.</p>
+        </div>
+      <% } else { %>
+        <form class="contact-form" method="POST" action="/kontakt">
+          <% if (error) { %><div class="alert alert--error"><%= error %></div><% } %>
+          <label>
+            <span>Jméno *</span>
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            <span>E-mail *</span>
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            <span>Telefon</span>
+            <input type="tel" name="phone" />
+          </label>
+          <label>
+            <span>Zpráva *</span>
+            <textarea name="message" rows="6" required placeholder="Jaký prostor máte a co byste chtěli? Rádi si projdeme detaily."></textarea>
+          </label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true" />
+          <button type="submit" class="btn btn--primary btn--lg">Odeslat zprávu</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,18 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">C</span>
+      <span class="brand-name">Cíhovský<span class="brand-sub">/ kuchyně</span></span>
+    </a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" aria-label="Hlavní">
+      <a href="/" class="<%= path === '/' ? 'is-active' : '' %>">Domů</a>
+      <a href="/kuchyne" class="<%= path && path.startsWith('/kuchyne') ? 'is-active' : '' %>">Kuchyně</a>
+      <a href="/dale-nabizime" class="<%= path && path.startsWith('/dale-nabizime') ? 'is-active' : '' %>">Dále nabízíme</a>
+      <a href="/o-nas" class="<%= path === '/o-nas' ? 'is-active' : '' %>">O nás</a>
+      <a href="/kontakt" class="<%= path === '/kontakt' ? 'is-active' : '' %>">Kontakt</a>
+    </nav>
+  </div>
+</header>

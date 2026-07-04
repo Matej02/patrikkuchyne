@@ -1,0 +1,62 @@
+<%- include('_layout-start') %>
+
+<header class="admin-header">
+  <div>
+    <span class="admin-eyebrow">Nahrát</span>
+    <h1>Nové fotografie</h1>
+  </div>
+</header>
+
+<% if (success) { %><div class="alert alert--success"><%= success %></div><% } %>
+<% if (error) { %><div class="alert alert--error"><%= error %></div><% } %>
+
+<form method="POST" action="/admin/nahrat" enctype="multipart/form-data" class="admin-form">
+  <div class="dropzone" id="dropzone">
+    <input type="file" name="photos" id="photos" accept="image/*" multiple required />
+    <div class="dropzone-inner">
+      <div class="dropzone-icon">↑</div>
+      <strong>Přetáhněte fotky sem nebo klikněte</strong>
+      <small>JPG, PNG, WEBP, AVIF · max. 15 MB / soubor · lze nahrát více najednou</small>
+      <div id="dropzone-preview" class="dropzone-preview"></div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>Kategorie</span>
+      <select name="category_id">
+        <option value="">— žádná —</option>
+        <% if (categoriesKuchyne.length) { %>
+          <optgroup label="Kuchyně">
+            <% categoriesKuchyne.forEach(function(cat){ %>
+              <option value="<%= cat.id %>"><%= cat.name %></option>
+            <% }); %>
+          </optgroup>
+        <% } %>
+        <% if (categoriesOstatni.length) { %>
+          <optgroup label="Dále nabízíme">
+            <% categoriesOstatni.forEach(function(cat){ %>
+              <option value="<%= cat.id %>"><%= cat.name %></option>
+            <% }); %>
+          </optgroup>
+        <% } %>
+      </select>
+    </label>
+    <label>
+      <span>Název (nepovinné, použije se pro všechny)</span>
+      <input type="text" name="title" placeholder="např. Dubová kuchyň s ostrůvkem" />
+    </label>
+  </div>
+
+  <label>
+    <span>Popis (nepovinné)</span>
+    <textarea name="description" rows="3" placeholder="Krátký popis realizace…"></textarea>
+  </label>
+
+  <div class="form-actions">
+    <a href="/admin/fotky" class="btn btn--ghost btn--dark">Zrušit</a>
+    <button type="submit" class="btn btn--primary btn--lg">Nahrát fotografie</button>
+  </div>
+</form>
+
+<%- include('_layout-end') %>

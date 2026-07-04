@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: kuchyne-cihovsky
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run init-db && npm run seed-demo
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        value: kuchyne2026
+      - key: CONTACT_EMAIL
+        value: info@kuchyne-cihovsky.cz
+      - key: CONTACT_PHONE
+        value: "+420 000 000 000"
+      - key: CONTACT_ADDRESS
+        value: Provozovna, Česká republika
+      - key: CONTACT_HOURS
+        value: "Po–Pá 8:00–16:00"
+      - key: INSTAGRAM_URL
+        value: https://instagram.com/kuchyne_cihovsky
+      - key: FACEBOOK_URL
+        value: https://facebook.com/kuchyne.cihovsky

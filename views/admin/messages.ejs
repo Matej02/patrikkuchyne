@@ -1,0 +1,36 @@
+<%- include('_layout-start') %>
+
+<header class="admin-header">
+  <div>
+    <span class="admin-eyebrow">Komunikace</span>
+    <h1>Zprávy z kontaktního formuláře</h1>
+  </div>
+</header>
+
+<% if (messages.length === 0) { %>
+  <div class="admin-empty">
+    <p>Zatím žádné zprávy.</p>
+  </div>
+<% } else { %>
+  <ul class="message-list message-list--full">
+    <% messages.forEach(function(m){ %>
+      <li class="message-item">
+        <div class="message-head">
+          <div>
+            <strong><%= m.name %></strong>
+            <a href="mailto:<%= m.email %>" class="link"><%= m.email %></a>
+            <% if (m.phone) { %><span class="muted">· <%= m.phone %></span><% } %>
+          </div>
+          <time><%= new Date(m.created_at).toLocaleString('cs-CZ') %></time>
+        </div>
+        <p class="message-body"><%= m.message %></p>
+        <form method="POST" action="/admin/zpravy/<%= m.id %>/smazat"
+              onsubmit="return confirm('Smazat tuto zprávu?');">
+          <button type="submit" class="btn btn--danger btn--sm">Smazat</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('_layout-end') %>

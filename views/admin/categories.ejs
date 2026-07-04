@@ -1,0 +1,60 @@
+<%- include('_layout-start') %>
+
+<header class="admin-header">
+  <div>
+    <span class="admin-eyebrow">Katalog</span>
+    <h1>Kategorie</h1>
+  </div>
+</header>
+
+<div class="two-col-admin">
+  <section class="admin-panel">
+    <h2>Přidat novou</h2>
+    <form method="POST" action="/admin/kategorie" class="admin-form">
+      <label><span>Název *</span><input type="text" name="name" required /></label>
+      <label>
+        <span>Sekce *</span>
+        <select name="section" required>
+          <option value="kuchyne">Kuchyně (hlavní činnost)</option>
+          <option value="ostatni">Dále nabízíme (dveře, skříně, nábytek…)</option>
+        </select>
+      </label>
+      <label><span>URL slug (necháte prázdné = vygeneruje se)</span><input type="text" name="slug" placeholder="např. moderni" /></label>
+      <label><span>Popis</span><textarea name="description" rows="2"></textarea></label>
+      <label><span>Pořadí</span><input type="number" name="sort_order" value="0" /></label>
+      <button type="submit" class="btn btn--primary">Přidat kategorii</button>
+    </form>
+  </section>
+
+  <section class="admin-panel">
+    <h2>Existující</h2>
+    <% if (categories.length === 0) { %>
+      <p class="muted">Zatím žádné kategorie.</p>
+    <% } else { %>
+      <% var groups = { kuchyne: [], ostatni: [] };
+         categories.forEach(function(c){ (groups[c.section] || (groups[c.section]=[])).push(c); }); %>
+      <% ['kuchyne','ostatni'].forEach(function(sec){ if (!groups[sec] || groups[sec].length === 0) return; %>
+        <h3 class="category-group-title">
+          <%= sec === 'kuchyne' ? 'Kuchyně' : 'Dále nabízíme' %>
+        </h3>
+        <ul class="category-list">
+          <% groups[sec].forEach(function(cat){ %>
+            <li>
+              <div>
+                <strong><%= cat.name %></strong>
+                <small class="muted">/<%= cat.slug %> · <%= cat.photo_count %> fotek</small>
+                <% if (cat.description) { %><p class="muted"><%= cat.description %></p><% } %>
+              </div>
+              <form method="POST" action="/admin/kategorie/<%= cat.id %>/smazat"
+                    onsubmit="return confirm('Opravdu smazat kategorii \'<%= cat.name %>\'? Fotky zůstanou, jen ztratí kategorii.');">
+                <button type="submit" class="btn btn--danger btn--sm">Smazat</button>
+              </form>
+            </li>
+          <% }); %>
+        </ul>
+      <% }); %>
+    <% } %>
+  </section>
+</div>
+
+<%- include('_layout-end') %>

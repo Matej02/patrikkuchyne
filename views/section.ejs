@@ -1,0 +1,64 @@
+<%- include('partials/head') %>
+<body class="page-section page-section--<%= section %>">
+<%- include('partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow"><%= section === 'kuchyne' ? 'Naše hlavní řemeslo' : 'Doplňkové služby' %></span>
+    <h1 class="display display--xl"><%= heading %></h1>
+    <p class="page-lead"><%= lead %></p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <% if (sectionCats.length > 0) { %>
+      <nav class="filter-bar">
+        <a href="<%= baseUrl %>" class="filter <%= !activeCategory ? 'is-active' : '' %>">Vše</a>
+        <% sectionCats.forEach(function(cat){ %>
+          <a href="<%= baseUrl %>/<%= cat.slug %>"
+             class="filter <%= activeCategory && activeCategory.id === cat.id ? 'is-active' : '' %>">
+            <%= cat.name %>
+          </a>
+        <% }); %>
+      </nav>
+    <% } %>
+
+    <% if (photos.length === 0) { %>
+      <div class="empty-hero">
+        <p>V této sekci zatím nejsou žádné fotografie. Sledujte nás — brzy je doplníme.</p>
+        <% if (activeCategory) { %>
+          <a class="btn btn--ghost btn--dark" href="<%= baseUrl %>">← Zpět na všechny</a>
+        <% } %>
+      </div>
+    <% } else { %>
+      <div class="masonry">
+        <% photos.forEach(function(p){ %>
+          <a class="masonry-item" href="/uploads/<%= p.filename %>" data-lightbox
+             data-title="<%= p.title || '' %>" data-desc="<%= p.description || '' %>">
+            <img src="/uploads/<%= p.thumb_filename || p.filename %>"
+                 alt="<%= p.title || heading %>" loading="lazy" />
+            <% if (p.title || p.cat_name) { %>
+              <div class="masonry-caption">
+                <% if (p.cat_name) { %><span class="tag"><%= p.cat_name %></span><% } %>
+                <% if (p.title) { %><strong><%= p.title %></strong><% } %>
+              </div>
+            <% } %>
+          </a>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="section section--accent">
+  <div class="container cta-band">
+    <div>
+      <span class="eyebrow eyebrow--dark">Máte konkrétní představu?</span>
+      <h2 class="display">Napište nám.</h2>
+    </div>
+    <a href="/kontakt" class="btn btn--primary btn--lg">Nezávazná konzultace →</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

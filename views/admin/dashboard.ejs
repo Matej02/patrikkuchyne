@@ -1,0 +1,82 @@
+<%- include('_layout-start') %>
+
+<header class="admin-header">
+  <div>
+    <span class="admin-eyebrow">Přehled</span>
+    <h1>Vítejte zpátky, <%= currentUser %>.</h1>
+  </div>
+  <a href="/admin/nahrat" class="btn btn--primary">↑ Nahrát nové fotky</a>
+</header>
+
+<div class="stats-grid">
+  <div class="stat">
+    <span class="stat-label">Fotografie</span>
+    <strong class="stat-value"><%= stats.photos %></strong>
+    <a href="/admin/fotky" class="stat-link">Spravovat →</a>
+  </div>
+  <div class="stat">
+    <span class="stat-label">Kategorie</span>
+    <strong class="stat-value"><%= stats.categories %></strong>
+    <a href="/admin/kategorie" class="stat-link">Upravit →</a>
+  </div>
+  <div class="stat <%= stats.unreadMessages > 0 ? 'stat--alert' : '' %>">
+    <span class="stat-label">Nové zprávy</span>
+    <strong class="stat-value"><%= stats.unreadMessages %></strong>
+    <a href="/admin/zpravy" class="stat-link">Zobrazit →</a>
+  </div>
+  <div class="stat">
+    <span class="stat-label">Celkem zpráv</span>
+    <strong class="stat-value"><%= stats.messages %></strong>
+    <a href="/admin/zpravy" class="stat-link">Archiv →</a>
+  </div>
+</div>
+
+<section class="admin-section">
+  <div class="admin-section-head">
+    <h2>Poslední fotky</h2>
+    <a href="/admin/fotky" class="link">Všechny →</a>
+  </div>
+  <% if (recentPhotos.length === 0) { %>
+    <div class="admin-empty">
+      <p>Zatím žádné fotky. Začněte nahráním prvních.</p>
+      <a href="/admin/nahrat" class="btn btn--primary">Nahrát fotky</a>
+    </div>
+  <% } else { %>
+    <div class="thumb-grid">
+      <% recentPhotos.forEach(function(p){ %>
+        <div class="thumb-card">
+          <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="" />
+          <div class="thumb-meta">
+            <% if (p.cat_name) { %><span class="tag tag--dark"><%= p.cat_name %></span><% } %>
+            <strong><%= p.title || 'Bez názvu' %></strong>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  <% } %>
+</section>
+
+<section class="admin-section">
+  <div class="admin-section-head">
+    <h2>Nejnovější zprávy</h2>
+    <a href="/admin/zpravy" class="link">Všechny →</a>
+  </div>
+  <% if (recentMessages.length === 0) { %>
+    <div class="admin-empty"><p>Zatím žádné zprávy.</p></div>
+  <% } else { %>
+    <ul class="message-list">
+      <% recentMessages.forEach(function(m){ %>
+        <li class="message-item <%= m.read ? '' : 'is-unread' %>">
+          <div>
+            <strong><%= m.name %></strong>
+            <span class="muted"><%= m.email %></span>
+          </div>
+          <p><%= m.message.slice(0, 140) %><%= m.message.length > 140 ? '…' : '' %></p>
+          <time><%= new Date(m.created_at).toLocaleString('cs-CZ') %></time>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
+
+<%- include('_layout-end') %>

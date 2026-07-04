@@ -1,0 +1,23 @@
+{
+  "name": "kuchyne-cihovsky-v2",
+  "version": "1.0.0",
+  "description": "Kuchyne Cihovsky - moderni web s administraci fotogalerie",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "init-db": "node scripts/init-db.js",
+    "seed-demo": "node scripts/seed-demo.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^6.10.1",
+    "sharp": "^0.33.5"
+  }
+}
