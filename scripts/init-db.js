@@ -75,19 +75,20 @@ if (catCount === 0) {
   console.log('✓ Vytvořeny výchozí kategorie (Kuchyně + Dále nabízíme)');
 }
 
-// Create default admin
+// Create / update admin — heslo se vždy synchronizuje z env vars
 const username = process.env.ADMIN_USERNAME || 'admin';
 const password = process.env.ADMIN_PASSWORD || 'admin123';
+const hash = bcrypt.hashSync(password, 12);
 const existing = db.prepare('SELECT id FROM users WHERE username = ?').get(username);
 if (!existing) {
-  const hash = bcrypt.hashSync(password, 12);
   db.prepare('INSERT INTO users (username, password_hash) VALUES (?, ?)').run(username, hash);
   console.log(`✓ Vytvořen admin účet — přihlašovací jméno: ${username}`);
-  console.log(`  Heslo: ${password}`);
-  console.log('  DŮLEŽITÉ: změňte heslo po prvním přihlášení nebo upravte .env');
 } else {
-  console.log(`ℹ Admin '${username}' už existuje — přeskočeno`);
+  db.prepare('UPDATE users SET password_hash = ? WHERE id = ?').run(hash, existing.id);
+  console.log(`✓ Aktualizováno heslo admina '${username}' z ADMIN_PASSWORD env`);
 }
+console.log(`  Heslo: ${password}`);
+console.log('  DŮLEŽITÉ: pro produkci nastavte ADMIN_PASSWORD v .env nebo v Render dashboardu.');
 
 db.close();
 console.log('✓ Databáze připravena');

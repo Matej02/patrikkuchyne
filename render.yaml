@@ -3,7 +3,7 @@ services:
     name: kuchyne-cihovsky
     runtime: node
     plan: free
-    buildCommand: npm install && npm run init-db && npm run seed-demo
+    buildCommand: npm install && npm run init-db && npm run seed-real
     startCommand: npm start
     envVars:
       - key: NODE_VERSION
