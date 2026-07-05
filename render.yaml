@@ -3,7 +3,8 @@ services:
     name: kuchyne-cihovsky
     runtime: node
     plan: free
-    buildCommand: npm install && npm run init-db && npm run seed-real
+    autoDeploy: true
+    buildCommand: npm install && (npm run init-db || true) && (npm run seed-real || echo "seed-real skipped")
     startCommand: npm start
     envVars:
       - key: NODE_VERSION

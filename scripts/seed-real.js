@@ -109,8 +109,9 @@ async function main() {
   const catBySlug = {};
   db.prepare('SELECT * FROM categories').all().forEach(c => catBySlug[c.slug] = c);
 
-  // Odstranit dřívější demo & real fotky
-  const prev = db.prepare("SELECT filename, thumb_filename FROM photos WHERE filename LIKE 'demo-%' OR filename LIKE 'real-%'").all();
+  // Odstranit jen DB záznamy (fotky real-* zůstávají v gitu)
+  // Demo soubory smažeme z disku, protože v gitu nejsou
+  const prev = db.prepare("SELECT filename, thumb_filename FROM photos WHERE filename LIKE 'demo-%'").all();
   for (const row of prev) {
     for (const name of [row.filename, row.thumb_filename]) {
       if (!name) continue;
