@@ -288,21 +288,21 @@ em { font-style: italic; font-family: var(--display); }
 }
 .hero-ambient-bg img {
   position: absolute;
-  width: 65%;
+  width: 70%;
   height: 100%;
   object-fit: cover;
-  filter: blur(38px) saturate(0.7) brightness(1.08) contrast(0.95);
-  transform: scale(1.25); /* prevent blur edges showing */
+  filter: blur(20px) saturate(0.85) brightness(1.02) contrast(1.02);
+  transform: scale(1.2);
 }
 .hero-ambient-bg img:first-child {
   top: 0;
-  left: -8%;
+  left: -10%;
   animation: ambient-drift-1 44s ease-in-out infinite alternate;
 }
 .hero-ambient-bg .hero-ambient-bg-2 {
   top: 0;
-  right: -8%;
-  opacity: 0.6;
+  right: -10%;
+  opacity: 0.8;
   animation: ambient-drift-2 52s ease-in-out infinite alternate;
 }
 @keyframes ambient-drift-1 {
@@ -320,11 +320,26 @@ em { font-style: italic; font-family: var(--display); }
   inset: 0;
   z-index: 1;
   background:
-    radial-gradient(ellipse 90% 70% at 50% 50%,
-      rgba(239, 233, 220, 0.35) 0%,
-      rgba(239, 233, 220, 0.72) 55%,
-      rgba(228, 219, 197, 0.85) 100%),
-    linear-gradient(180deg, rgba(239, 233, 220, 0.4) 0%, rgba(228, 219, 197, 0.55) 100%);
+    radial-gradient(ellipse 80% 60% at 50% 50%,
+      rgba(239, 233, 220, 0.15) 0%,
+      rgba(239, 233, 220, 0.45) 55%,
+      rgba(228, 219, 197, 0.65) 100%),
+    linear-gradient(180deg, rgba(239, 233, 220, 0.2) 0%, rgba(228, 219, 197, 0.35) 100%);
+}
+
+/* Blueprint grid overlay — subtle architect drawing feel */
+.hero-ambient-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(to right, var(--ink) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ink) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 85%);
 }
 
 /* Paper grain noise */
@@ -1043,12 +1058,14 @@ em { font-style: italic; font-family: var(--display); }
 .categories-section { background: var(--paper); }
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--hairline);
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
 }
+@media (max-width: 1100px) { .categories-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .categories-grid { grid-template-columns: 1fr; } }
 .cat-tile {
   position: relative;
   display: block;
@@ -1078,6 +1095,13 @@ em { font-style: italic; font-family: var(--display); }
 }
 .cat-tile:hover .cat-tile-overlay { opacity: 1; }
 .cat-tile:hover { color: var(--paper); }
+
+/* Mobile / touch: photo vždy vidět, nespoléhat na hover */
+@media (hover: none), (max-width: 900px) {
+  .cat-tile img { opacity: 1; transform: scale(1); }
+  .cat-tile-overlay { opacity: 1; }
+  .cat-tile { color: var(--paper); }
+}
 .cat-tile-content {
   position: relative;
   z-index: 3;
