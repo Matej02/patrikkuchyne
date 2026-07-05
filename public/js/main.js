@@ -6,15 +6,20 @@
     document.body.classList.add('is-loaded');
   });
 
-  // ── STICKY HEADER — přidá class po scroll ──────────────────────
+  // ── STICKY HEADER + SCROLL PROGRESS ─────────────────────────────
   const header = document.getElementById('site-header');
-  if (header) {
-    const onScroll = () => {
-      header.classList.toggle('is-scrolled', window.scrollY > 20);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
+  const progressBar = document.querySelector('[data-scroll-progress] .scroll-progress-bar');
+  const onScroll = () => {
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 20);
+    if (progressBar) {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const p = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progressBar.style.width = p + '%';
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   // ── MOBILE MENU ────────────────────────────────────────────────
   const menuToggle = document.querySelector('.menu-toggle');

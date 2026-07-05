@@ -15,7 +15,19 @@ ensureSeed();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const BUILD_VERSION = 'v12';
+const BUILD_VERSION = 'v13';
+
+// Skutečné údaje dílny — hardcoded, aby staré env vars na Renderu nepřebily.
+// Klient dodá aktualizace až budou známé (IČO, provozní hodiny, sociální sítě).
+const REAL_CONTACT = {
+  email: 'cihovsky@c-box.cz',
+  phone: '+420 608 032 103',
+  address: 'Olešník 6, 373 50 Olešník',
+  hours: 'Po–Pá 7:00–15:30',
+  owner: 'Vlastimil Čihovský',
+  instagram: 'https://instagram.com/kuchyne_cihovsky',
+  facebook: 'https://facebook.com/kuchyne.cihovsky'
+};
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -45,15 +57,7 @@ app.use((req, res, next) => {
   res.locals.categories = cats;
   res.locals.categoriesKuchyne = cats.filter(c => c.section === 'kuchyne');
   res.locals.categoriesOstatni = cats.filter(c => c.section === 'ostatni');
-  res.locals.contact = {
-    email: process.env.CONTACT_EMAIL || 'info@kuchyne-cihovsky.cz',
-    phone: process.env.CONTACT_PHONE || '+420 000 000 000',
-    address: process.env.CONTACT_ADDRESS || 'Olešník 6, 373 50 Olešník',
-    hours: process.env.CONTACT_HOURS || 'Po–Pá 7:00–15:30',
-    owner: process.env.CONTACT_OWNER || 'Vlastimil Čihovský',
-    instagram: process.env.INSTAGRAM_URL || 'https://instagram.com/kuchyne_cihovsky',
-    facebook: process.env.FACEBOOK_URL || 'https://facebook.com/kuchyne.cihovsky'
-  };
+  res.locals.contact = REAL_CONTACT;
   res.locals.path = req.path;
   next();
 });
