@@ -77,6 +77,12 @@ async function processOne(item, idx) {
   const thumbName = `thumb-real-${num}.webp`;
   const url = SOURCE_BASE + item.srcPath;
 
+  const fullPath = path.join(uploadsDir, filename);
+  const thumbPath = path.join(uploadsDir, thumbName);
+  if (fs.existsSync(fullPath) && fs.existsSync(thumbPath)) {
+    return { filename, thumbName, skipped: true };
+  }
+
   const buf = await download(url);
 
   // Full-size (optimalizované)
@@ -129,9 +135,9 @@ async function main() {
       continue;
     }
     try {
-      const { filename, thumbName } = await processOne(item, i);
+      const { filename, thumbName, skipped } = await processOne(item, i);
       insert.run(filename, thumbName, item.title, item.desc, cat.id, i);
-      console.log(`  ✓ ${filename}  ·  ${item.title}  (${cat.name})`);
+      console.log(`  ${skipped ? '⋯' : '✓'} ${filename}  ·  ${item.title}  (${cat.name})${skipped ? ' [z gitu]' : ''}`);
       ok++;
     } catch (err) {
       console.warn(`  ✗ ${item.srcPath} → ${err.message}`);
