@@ -15,7 +15,7 @@ ensureSeed();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const BUILD_VERSION = 'v10';
+const BUILD_VERSION = 'v11';
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
