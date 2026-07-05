@@ -15,7 +15,7 @@ ensureSeed();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const BUILD_VERSION = 'v15';
+const BUILD_VERSION = 'v16';
 
 // Skutečné údaje dílny — hardcoded, aby staré env vars na Renderu nepřebily.
 // Klient dodá aktualizace až budou známé (IČO, provozní hodiny, sociální sítě).
