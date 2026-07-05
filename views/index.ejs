@@ -2,84 +2,49 @@
 <body class="page-home" data-scroll="0">
 <%- include('partials/header') %>
 
-<!-- ═══════════════ HERO — EDITORIAL SPLIT ═══════════════ -->
-<section class="hero-editorial">
-  <div class="hero-editorial-grid">
-    <div class="hero-left">
-      <div class="hero-meta-row">
-        <span class="eyebrow">01 · Dřevointeriér</span>
-        <span class="hero-est">Est. 1998 · Olešník</span>
-      </div>
+<!-- ═══════════════ HERO — CINEMATIC COVER ═══════════════ -->
+<section class="hero-cover">
+  <div class="hero-cover-bg" aria-hidden="true">
+    <img src="/uploads/real-06.jpg" alt="" />
+    <div class="hero-cover-gradient"></div>
+  </div>
 
-      <h1 class="hero-title-editorial" data-word-reveal>
-        <span class="word"><span style="animation-delay:0.05s">Kuchyň,</span></span>
-        <span class="word"><span style="animation-delay:0.15s">kterou</span></span><br>
-        <span class="word"><span style="animation-delay:0.25s">nezavře</span></span>
-        <span class="word"><em><span style="animation-delay:0.35s">čas</span></em></span><span class="word"><span style="animation-delay:0.45s">.</span></span>
-      </h1>
-
-      <div class="hero-byline" data-reveal>
-        <strong>Vlastimil Čihovský</strong>
-        <span>Truhlář · Dílna v Olešníku</span>
-      </div>
-
-      <p class="hero-lead-editorial" data-reveal>
-        Kuchyně, dveře a vestavěný nábytek na míru.
-        Ručně, od základu, po dílu. Bez katalogů, bez zkratek.
-      </p>
-
-      <div class="hero-cta-editorial" data-reveal>
-        <a href="/kontakt" class="btn btn--primary btn--lg">
-          <span>Nezávazná poptávka</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-        <a href="/kuchyne" class="btn-text-cta">
-          <span>Realizace</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-
-      <div class="hero-contact-row">
-        <span>Olešník 6, 373 50</span>
-        <a href="tel:+420608032103">+420 608 032 103</a>
-        <a href="mailto:cihovsky@c-box.cz">cihovsky@c-box.cz</a>
-      </div>
+  <div class="hero-cover-card">
+    <div class="hero-cover-meta">
+      <span class="mono">01 · Dřevointeriér</span>
+      <span class="mono">Est. 1998 · Olešník</span>
     </div>
 
-    <div class="hero-photo-frame" data-reveal>
-      <img src="/uploads/real-06.jpg" alt="Realizace kuchyně Čihovský" />
-      <!-- SIGNATURE ELEMENT: dimensional annotations overlaid like a plan -->
-      <div class="dim-annotations" aria-hidden="true">
-        <svg viewBox="0 0 400 500" preserveAspectRatio="none">
-          <!-- Horizontal dimension line — width at top -->
-          <line class="dim-tick" x1="60" y1="60" x2="60" y2="72"/>
-          <line class="dim-tick" x1="340" y1="60" x2="340" y2="72"/>
-          <line class="dim-line" x1="60" y1="66" x2="340" y2="66"/>
-          <text x="200" y="55" text-anchor="middle">3 200 mm</text>
+    <h1 class="hero-cover-title" data-word-reveal>
+      <span class="word"><span style="animation-delay:0.05s">Kuchyň,</span></span>
+      <span class="word"><span style="animation-delay:0.15s">kterou</span></span><br>
+      <span class="word"><span style="animation-delay:0.25s">nezavře</span></span>
+      <span class="word"><em><span style="animation-delay:0.35s">čas</span></em></span><span class="word"><span style="animation-delay:0.45s">.</span></span>
+    </h1>
 
-          <!-- Vertical height annotation on right -->
-          <line class="dim-tick" x1="368" y1="100" x2="380" y2="100"/>
-          <line class="dim-tick" x1="368" y1="320" x2="380" y2="320"/>
-          <line class="dim-line" x1="374" y1="100" x2="374" y2="320"/>
-          <text x="386" y="215" transform="rotate(90 386 215)" text-anchor="middle">H = 2 200</text>
+    <p class="hero-cover-lead" data-reveal>
+      Kuchyně, dveře a vestavěný nábytek na míru. Ručně, od základu, po dílu. Bez katalogů, bez zkratek.
+    </p>
 
-          <!-- Small detail annotation lower right -->
-          <line class="dim-line" x1="285" y1="425" x2="360" y2="425"/>
-          <line class="dim-tick" x1="285" y1="419" x2="285" y2="431"/>
-          <line class="dim-tick" x1="360" y1="419" x2="360" y2="431"/>
-          <text x="322" y="446" text-anchor="middle">Deska 40 mm</text>
+    <div class="hero-cover-cta" data-reveal>
+      <a href="/kontakt" class="btn btn--primary btn--lg">
+        <span>Nezávazná poptávka</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="/kuchyne" class="btn-text-cta">
+        <span>Realizace</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
 
-          <!-- Callout arrow for material -->
-          <line class="dim-line" x1="50" y1="430" x2="120" y2="380"/>
-          <text x="20" y="446">Dub masiv</text>
-        </svg>
+    <div class="hero-cover-foot">
+      <div class="hero-cover-signature">
+        <strong>Vlastimil Čihovský</strong>
+        <span class="mono">Truhlář · dílna v Olešníku</span>
       </div>
-
-      <div class="hero-stamp" aria-hidden="true">
-        <div class="hero-stamp-inner">
-          <strong>Ručně</strong>
-          <span>Od 1998<br>Olešník</span>
-        </div>
+      <div class="hero-cover-contact">
+        <a href="tel:+420608032103">+420 608 032 103</a>
+        <a href="mailto:cihovsky@c-box.cz">cihovsky@c-box.cz</a>
       </div>
     </div>
   </div>
