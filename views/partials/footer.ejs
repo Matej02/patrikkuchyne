@@ -1,28 +1,11 @@
 <footer class="site-footer">
-  <div class="footer-marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>RUČNÍ VÝROBA</span><span class="marquee-dot">◆</span>
-      <span>OD 1998</span><span class="marquee-dot">◆</span>
-      <span>KUCHYNĚ NA MÍRU</span><span class="marquee-dot">◆</span>
-      <span>DVEŘE</span><span class="marquee-dot">◆</span>
-      <span>VESTAVĚNÉ SKŘÍNĚ</span><span class="marquee-dot">◆</span>
-      <span>NÁBYTEK</span><span class="marquee-dot">◆</span>
-      <span>RUČNÍ VÝROBA</span><span class="marquee-dot">◆</span>
-      <span>OD 1998</span><span class="marquee-dot">◆</span>
-      <span>KUCHYNĚ NA MÍRU</span><span class="marquee-dot">◆</span>
-      <span>DVEŘE</span><span class="marquee-dot">◆</span>
-      <span>VESTAVĚNÉ SKŘÍNĚ</span><span class="marquee-dot">◆</span>
-      <span>NÁBYTEK</span><span class="marquee-dot">◆</span>
-    </div>
-  </div>
-
   <div class="container footer-grid">
     <div class="footer-brand-col">
       <div class="brand brand--footer">
-        <span class="brand-mark">C</span>
-        <span class="brand-name">Čihovský<span class="brand-sub">/ řemeslo od 1998</span></span>
+        <span class="brand-mark">Č</span>
+        <span class="brand-name">Čihovský<span class="brand-sub">Dřevointeriér · Olešník</span></span>
       </div>
-      <p class="muted">Rodinná dílna, která už přes dvě desítky let vyrábí kuchyně, dveře a nábytek na míru. Pro každého klienta osobně.</p>
+      <p>Dílna Vlastimila Čihovského vyrábí kuchyně, dveře a nábytek na míru od roku 1998. Ručně, bez katalogů. Olešník, jižní Čechy.</p>
       <div class="socials">
         <% if (contact.instagram) { %>
           <a href="<%= contact.instagram %>" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
@@ -64,17 +47,17 @@
     </div>
 
     <div>
-      <h4>Kontakt</h4>
+      <h4>Dílna</h4>
       <ul class="footer-links footer-contact">
-        <li><a href="mailto:<%= contact.email %>"><%= contact.email %></a></li>
         <li><a href="tel:<%= contact.phone.replace(/\s/g, '') %>"><%= contact.phone %></a></li>
+        <li><a href="mailto:<%= contact.email %>"><%= contact.email %></a></li>
         <li class="muted"><%= contact.address %></li>
         <li class="muted"><%= contact.hours %></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom container">
-    <span>© <%= new Date().getFullYear() %> Kuchyně Čihovský. Všechna práva vyhrazena.</span>
+    <span>© <%= new Date().getFullYear() %> · Vlastimil Čihovský, Dřevointeriér Olešník · IČO na vyžádání</span>
     <a href="/admin/login" class="admin-link">Interní přístup</a>
   </div>
 </footer>

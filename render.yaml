@@ -16,13 +16,15 @@ services:
       - key: ADMIN_PASSWORD
         value: kuchyne2026
       - key: CONTACT_EMAIL
-        value: info@kuchyne-cihovsky.cz
+        value: cihovsky@c-box.cz
       - key: CONTACT_PHONE
-        value: "+420 000 000 000"
+        value: "+420 608 032 103"
       - key: CONTACT_ADDRESS
-        value: Provozovna, Česká republika
+        value: "Olešník 6, 373 50 Olešník"
       - key: CONTACT_HOURS
-        value: "Po–Pá 8:00–16:00"
+        value: "Po–Pá 7:00–15:30"
+      - key: CONTACT_OWNER
+        value: "Vlastimil Čihovský"
       - key: INSTAGRAM_URL
         value: https://instagram.com/kuchyne_cihovsky
       - key: FACEBOOK_URL

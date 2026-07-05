@@ -1,24 +1,19 @@
 <header class="site-header" id="site-header">
   <div class="header-inner">
     <a class="brand" href="/">
-      <span class="brand-mark">C</span>
-      <span class="brand-name">Čihovský<span class="brand-sub">/ řemeslo od 1998</span></span>
+      <span class="brand-mark">Č</span>
+      <span class="brand-name">Čihovský<span class="brand-sub">Dřevointeriér · Olešník</span></span>
     </a>
     <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <nav class="site-nav" aria-label="Hlavní">
-      <a href="/" class="<%= path === '/' ? 'is-active' : '' %>">Domů</a>
-      <a href="/kuchyne" class="<%= path && path.startsWith('/kuchyne') ? 'is-active' : '' %>">Kuchyně</a>
-      <a href="/dale-nabizime" class="<%= path && path.startsWith('/dale-nabizime') ? 'is-active' : '' %>">Dále nabízíme</a>
-      <a href="/o-nas" class="<%= path === '/o-nas' ? 'is-active' : '' %>">O nás</a>
-      <a href="/kontakt" class="<%= path === '/kontakt' ? 'is-active' : '' %>">Kontakt</a>
+      <a href="/" class="<%= path === '/' ? 'active' : '' %>">Domů</a>
+      <a href="/kuchyne" class="<%= path && path.startsWith('/kuchyne') ? 'active' : '' %>">Kuchyně</a>
+      <a href="/dale-nabizime" class="<%= path && path.startsWith('/dale-nabizime') ? 'active' : '' %>">Dále</a>
+      <a href="/o-nas" class="<%= path === '/o-nas' ? 'active' : '' %>">O nás</a>
+      <a href="/kontakt" class="<%= path === '/kontakt' ? 'active' : '' %>">Kontakt</a>
     </nav>
-    <a href="/kontakt" class="header-cta">Nezávazná poptávka →</a>
+    <a href="/kontakt" class="header-cta">Poptávka →</a>
   </div>
 </header>
-
-<a href="/kontakt" class="floating-cta" aria-label="Poptat">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  <span>Poptat</span>
-</a>

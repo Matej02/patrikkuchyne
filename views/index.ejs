@@ -2,68 +2,93 @@
 <body class="page-home" data-scroll="0">
 <%- include('partials/header') %>
 
-<!-- ═══════════════ 1) CINEMATIC HERO ═══════════════ -->
-<section class="hero-cinematic">
-  <div class="hero-bg" aria-hidden="true">
-    <img src="/uploads/real-06.jpg" alt="" class="hero-bg-img" onerror="this.style.display='none'" />
-    <div class="hero-bg-overlay"></div>
-    <div class="hero-bg-noise"></div>
-  </div>
+<!-- ═══════════════ HERO — EDITORIAL SPLIT ═══════════════ -->
+<section class="hero-editorial">
+  <div class="hero-editorial-grid">
+    <div class="hero-left">
+      <div class="hero-meta-row">
+        <span class="eyebrow">01 · Dřevointeriér</span>
+        <span class="hero-est">Est. 1998 · Olešník</span>
+      </div>
 
-  <div class="hero-content">
-    <div class="hero-eyebrow" data-reveal>
-      <span class="hero-line"></span>
-      <span>Rodinná dílna od roku 1998</span>
+      <h1 class="hero-title-editorial" data-reveal>
+        Kuchyň, kterou<br>nezavře <em>čas</em>.
+      </h1>
+
+      <div class="hero-byline" data-reveal>
+        <strong>Vlastimil Čihovský</strong>
+        <span>Truhlář · Dílna v Olešníku</span>
+      </div>
+
+      <p class="hero-lead-editorial" data-reveal>
+        Kuchyně, dveře a vestavěný nábytek na míru.
+        Ručně, od základu, po dílu. Bez katalogů, bez zkratek.
+      </p>
+
+      <div class="hero-cta-editorial" data-reveal>
+        <a href="/kontakt" class="btn btn--primary btn--lg">
+          <span>Nezávazná poptávka</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/kuchyne" class="btn-text-cta">
+          <span>Realizace</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-contact-row">
+        <span>Olešník 6, 373 50</span>
+        <a href="tel:+420608032103">+420 608 032 103</a>
+        <a href="mailto:cihovsky@c-box.cz">cihovsky@c-box.cz</a>
+      </div>
     </div>
-    <h1 class="hero-title-cinematic" data-reveal>
-      <span class="hero-word">Kuchyně,</span>
-      <span class="hero-word">které <em>přetrvají</em></span>
-      <span class="hero-word">generace.</span>
-    </h1>
-    <p class="hero-lead-cinematic" data-reveal>
-      Nejsme továrna. Jsme dílna, kde vzniká&nbsp;kus vaší domácnosti — ruční prací a materiály, které stárnou hezky.
-    </p>
-    <div class="hero-cta-cinematic" data-reveal>
-      <a href="/kuchyne" class="btn btn--primary btn--lg">
-        <span>Prohlédnout realizace</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      <a href="/kontakt" class="btn-text-cta">
-        <span>Nezávazná konzultace</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+
+    <div class="hero-photo-frame" data-reveal>
+      <img src="/uploads/real-06.jpg" alt="Realizace kuchyně Čihovský" />
+      <!-- SIGNATURE ELEMENT: dimensional annotations overlaid like a plan -->
+      <div class="dim-annotations" aria-hidden="true">
+        <svg viewBox="0 0 400 500" preserveAspectRatio="none">
+          <!-- Horizontal dimension line — width at top -->
+          <line class="dim-tick" x1="60" y1="60" x2="60" y2="72"/>
+          <line class="dim-tick" x1="340" y1="60" x2="340" y2="72"/>
+          <line class="dim-line" x1="60" y1="66" x2="340" y2="66"/>
+          <text x="200" y="55" text-anchor="middle">3 200 mm</text>
+
+          <!-- Vertical height annotation on right -->
+          <line class="dim-tick" x1="368" y1="100" x2="380" y2="100"/>
+          <line class="dim-tick" x1="368" y1="320" x2="380" y2="320"/>
+          <line class="dim-line" x1="374" y1="100" x2="374" y2="320"/>
+          <text x="386" y="215" transform="rotate(90 386 215)" text-anchor="middle">H = 2 200</text>
+
+          <!-- Small detail annotation lower right -->
+          <line class="dim-line" x1="285" y1="425" x2="360" y2="425"/>
+          <line class="dim-tick" x1="285" y1="419" x2="285" y2="431"/>
+          <line class="dim-tick" x1="360" y1="419" x2="360" y2="431"/>
+          <text x="322" y="446" text-anchor="middle">Deska 40 mm</text>
+
+          <!-- Callout arrow for material -->
+          <line class="dim-line" x1="50" y1="430" x2="120" y2="380"/>
+          <text x="20" y="446">Dub masiv</text>
+        </svg>
+      </div>
+
+      <div class="hero-stamp" aria-hidden="true">
+        <div class="hero-stamp-inner">
+          <strong>Ručně</strong>
+          <span>Od 1998<br>Olešník</span>
+        </div>
+      </div>
     </div>
   </div>
-
 </section>
 
-<!-- ═══════════════ 2) MARQUEE STRIP ═══════════════ -->
-<section class="marquee-section" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Ruční výroba</span><span class="marquee-dot">●</span>
-    <span>Od 1998</span><span class="marquee-dot">●</span>
-    <span>Kuchyně na míru</span><span class="marquee-dot">●</span>
-    <span>Dveře</span><span class="marquee-dot">●</span>
-    <span>Vestavěné skříně</span><span class="marquee-dot">●</span>
-    <span>Nábytek</span><span class="marquee-dot">●</span>
-    <span>Ruční výroba</span><span class="marquee-dot">●</span>
-    <span>Od 1998</span><span class="marquee-dot">●</span>
-    <span>Kuchyně na míru</span><span class="marquee-dot">●</span>
-    <span>Dveře</span><span class="marquee-dot">●</span>
-    <span>Vestavěné skříně</span><span class="marquee-dot">●</span>
-    <span>Nábytek</span><span class="marquee-dot">●</span>
-  </div>
-</section>
-
-<!-- ═══════════════ 3) 4 KATEGORIE S HOVER REVEAL ═══════════════ -->
+<!-- ═══════════════ CO VYRÁBÍME ═══════════════ -->
 <section class="section categories-section">
   <div class="container">
     <div class="section-head-mega">
-      <span class="eyebrow">01 / Co vyrábíme</span>
-      <h2 class="display-mega">
-        Čtyři světy<br>jednoho <em>řemesla</em>.
-      </h2>
-      <p class="section-lead">Vyberte styl. Klikněte. Prohlédněte si vše, co jsme v této kategorii vyrobili.</p>
+      <span class="eyebrow">02 · Co vyrábíme</span>
+      <h2 class="display-mega">Čtyři světy<br>jednoho <em>řemesla</em>.</h2>
+      <p class="section-lead">Kuchyně jsou to hlavní. Ale když si oblíbíte, jak pracujeme, málokdo skončí u nich.</p>
     </div>
 
     <div class="categories-grid">
@@ -73,10 +98,12 @@
         <% } %>
         <div class="cat-tile-overlay"></div>
         <div class="cat-tile-content">
-          <span class="cat-tile-num">01</span>
-          <h3 class="cat-tile-title">Moderní<br>kuchyně</h3>
-          <p class="cat-tile-desc">Čisté linie, matné povrchy, integrované spotřebiče. Kuchyně pro rok 2026.</p>
-          <span class="cat-tile-arrow">→</span>
+          <span class="cat-tile-num">01 · Kuchyně</span>
+          <div>
+            <h3 class="cat-tile-title">Moderní<br>kuchyně</h3>
+            <p class="cat-tile-desc">Čisté linie, integrované spotřebiče, matné nebo lakované povrchy.</p>
+            <span class="cat-tile-arrow">→</span>
+          </div>
         </div>
       </a>
 
@@ -86,10 +113,12 @@
         <% } %>
         <div class="cat-tile-overlay"></div>
         <div class="cat-tile-content">
-          <span class="cat-tile-num">02</span>
-          <h3 class="cat-tile-title">Rustikální<br>kuchyně</h3>
-          <p class="cat-tile-desc">Masiv, ruční patina, tradiční detaily. Kuchyně jako vzpomínka na babiččin dům.</p>
-          <span class="cat-tile-arrow">→</span>
+          <span class="cat-tile-num">02 · Kuchyně</span>
+          <div>
+            <h3 class="cat-tile-title">Rustikální<br>kuchyně</h3>
+            <p class="cat-tile-desc">Masiv, ruční patina, tradiční detaily. Kuchyň jako z chalupy po babičce.</p>
+            <span class="cat-tile-arrow">→</span>
+          </div>
         </div>
       </a>
 
@@ -99,10 +128,12 @@
         <% } %>
         <div class="cat-tile-overlay"></div>
         <div class="cat-tile-content">
-          <span class="cat-tile-num">03</span>
-          <h3 class="cat-tile-title">Ostrůvkové<br>kuchyně</h3>
-          <p class="cat-tile-desc">Srdce otevřeného prostoru. Bar, dřez, varný ostrůvek — místo, kde se rodina sejde.</p>
-          <span class="cat-tile-arrow">→</span>
+          <span class="cat-tile-num">03 · Kuchyně</span>
+          <div>
+            <h3 class="cat-tile-title">Ostrůvkové<br>kuchyně</h3>
+            <p class="cat-tile-desc">Srdce otevřeného prostoru. Bar, dřez, varný ostrůvek — místo pro sešlost.</p>
+            <span class="cat-tile-arrow">→</span>
+          </div>
         </div>
       </a>
 
@@ -112,60 +143,74 @@
         <% } %>
         <div class="cat-tile-overlay"></div>
         <div class="cat-tile-content">
-          <span class="cat-tile-num">04</span>
-          <h3 class="cat-tile-title">Dveře,<br>skříně, nábytek</h3>
-          <p class="cat-tile-desc">Když si oblíbíte naši práci u kuchyně, nezůstane u ní. Vyrobíme cokoli ze dřeva.</p>
-          <span class="cat-tile-arrow">→</span>
+          <span class="cat-tile-num">04 · Dále</span>
+          <div>
+            <h3 class="cat-tile-title">Dveře,<br>skříně, nábytek</h3>
+            <p class="cat-tile-desc">Dveře do celého bytu, vestavěné skříně, knihovny, komody. Cokoli ze dřeva.</p>
+            <span class="cat-tile-arrow">→</span>
+          </div>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ 4) NÁŠ PŘÍBĚH + POČÍTADLA ═══════════════ -->
+<!-- ═══════════════ NÁŠ PŘÍBĚH — spec sheet místo počítadel ═══════════════ -->
 <section class="section story-section">
   <div class="container">
     <div class="story-layout">
       <div class="story-left">
-        <span class="eyebrow">02 / Náš příběh</span>
+        <span class="eyebrow">03 · Kdo za tím stojí</span>
         <h2 class="display-mega">
+          Jeden truhlář.<br>
           Jedna dílna.<br>
-          Tři generace.<br>
-          <em>Nespočet</em> kuchyní.
+          <em>Dvacet sedm</em> let.
         </h2>
         <p class="story-p story-p--big">
-          Táta začal v roce 1998 v malé garáži s jedním hoblíkem
-          a představou, že kuchyně nemá být jen skládaná krabice.
+          Vlastimil Čihovský otevřel dílnu v Olešníku v roce 1998
+          s představou, že kuchyně nemá být skládaná krabice.
         </p>
         <p class="story-p">
-          Za dvě desítky let jsme z garáže vyrostli, ale způsob práce jsme si nechali stejný.
-          Chodíme zaměřit. Posloucháme. Kreslíme. Vyrábíme sami — od korpusu po pant.
-          A když je něco potřeba doladit i po letech, přijedeme.
+          Chodí zaměřit sám. Kreslí sám. Vyrábí sám nebo s jedním učedníkem.
+          A když je něco potřeba doladit i po letech — přijde a doladí.
         </p>
-        <a href="/o-nas" class="btn btn--ghost btn--dark">Přečíst celý příběh →</a>
+        <p class="story-p">
+          Bez katalogu. Bez showroomu. Bez zbytečných marketingových fint.
+          Jen dřevo, ruce a čas.
+        </p>
+        <div style="margin-top:32px">
+          <a href="/o-nas" class="btn-text-cta">
+            <span>Celý příběh</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
 
       <div class="story-right">
-        <div class="counter-grid">
-          <div class="counter-item" data-counter="25">
-            <strong class="counter-num">0</strong>
-            <span class="counter-plus">+</span>
-            <span class="counter-label">let zkušeností</span>
+        <div class="spec-list">
+          <div class="spec-item">
+            <span class="spec-label">Založeno</span>
+            <span class="spec-value">1998</span>
           </div>
-          <div class="counter-item" data-counter="400">
-            <strong class="counter-num">0</strong>
-            <span class="counter-plus">+</span>
-            <span class="counter-label">realizací</span>
+          <div class="spec-item">
+            <span class="spec-label">Sídlo</span>
+            <span class="spec-value" style="font-size:1.4rem">Olešník <em>6</em></span>
           </div>
-          <div class="counter-item" data-counter="100">
-            <strong class="counter-num">0</strong>
-            <span class="counter-percent">%</span>
-            <span class="counter-label">na míru</span>
+          <div class="spec-item">
+            <span class="spec-label">Záruka</span>
+            <span class="spec-value">5 <em>let</em></span>
           </div>
-          <div class="counter-item" data-counter="60">
-            <strong class="counter-num">0</strong>
-            <span class="counter-plus">+</span>
-            <span class="counter-label">měsíců záruky</span>
+          <div class="spec-item">
+            <span class="spec-label">Kování</span>
+            <span class="spec-value" style="font-size:1.4rem">Blum <em>doživotní</em></span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Dvířka</span>
+            <span class="spec-value" style="font-size:1.4rem">Trachea</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Zaměření</span>
+            <span class="spec-value" style="font-size:1.4rem"><em>zdarma</em></span>
           </div>
         </div>
       </div>
@@ -173,13 +218,11 @@
   </div>
 </section>
 
-<!-- ═══════════════ 5) HORIZONTÁLNÍ SCROLL GALERIE ═══════════════ -->
+<!-- ═══════════════ REALIZACE — HORIZONTÁLNÍ SCROLL ═══════════════ -->
 <section class="section-dark hscroll-section">
   <div class="container hscroll-head">
-    <div>
-      <span class="eyebrow eyebrow--accent">03 / Poslední z dílny</span>
-      <h2 class="display-mega">Realizace, které<br><em>promlouvají</em>.</h2>
-    </div>
+    <span class="eyebrow eyebrow--accent">04 · Poslední z dílny</span>
+    <h2 class="display-mega">Kuchyně, které<br><em>promlouvají</em>.</h2>
   </div>
 
   <div class="hscroll-wrap">
@@ -190,28 +233,28 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </button>
 
-  <div class="hscroll-track" data-hscroll>
-    <% (featured || []).forEach(function(p, idx){ %>
-      <a class="hscroll-card" href="/uploads/<%= p.filename %>" data-lightbox
-         data-title="<%= p.title || '' %>" data-desc="<%= p.description || '' %>">
-        <div class="hscroll-card-img">
-          <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="<%= p.title || 'Realizace' %>" loading="lazy" />
-        </div>
-        <div class="hscroll-card-meta">
-          <span class="hscroll-card-num"><%= String(idx + 1).padStart(2, '0') %></span>
-          <div>
-            <% if (p.cat_name) { %><span class="tag tag--accent"><%= p.cat_name %></span><% } %>
-            <strong><%= p.title || 'Realizace' %></strong>
+    <div class="hscroll-track" data-hscroll>
+      <% (featured || []).forEach(function(p, idx){ %>
+        <a class="hscroll-card" href="/uploads/<%= p.filename %>" data-lightbox
+           data-title="<%= p.title || '' %>" data-desc="<%= p.description || '' %>">
+          <div class="hscroll-card-img">
+            <img src="/uploads/<%= p.thumb_filename || p.filename %>" alt="<%= p.title || 'Realizace' %>" loading="lazy" />
           </div>
+          <div class="hscroll-card-meta">
+            <span class="hscroll-card-num"><%= String(idx + 1).padStart(2, '0') %></span>
+            <div>
+              <% if (p.cat_name) { %><span class="tag tag--accent"><%= p.cat_name %></span><% } %>
+              <strong><%= p.title || 'Realizace' %></strong>
+            </div>
+          </div>
+        </a>
+      <% }); %>
+      <a class="hscroll-card hscroll-card--last" href="/kuchyne">
+        <div class="hscroll-card-img">
+          <div class="hscroll-card-more"><span>Všechny<br>realizace →</span></div>
         </div>
       </a>
-    <% }); %>
-    <a class="hscroll-card hscroll-card--last" href="/kuchyne">
-      <div class="hscroll-card-more">
-        <span>Vidět<br>všechny →</span>
-      </div>
-    </a>
-  </div>
+    </div>
   </div>
 </section>
 
@@ -225,44 +268,43 @@
           <span class="threedee-badge-num">3D</span>
           <span class="threedee-badge-txt">vizualizace</span>
         </div>
-        <div class="threedee-caption">
-          <small>Realizace, která začala 3D návrhem</small>
-        </div>
+        <div class="threedee-caption">Realizace, která začala 3D návrhem</div>
       </div>
       <div class="threedee-content">
-        <span class="eyebrow">Bonus zdarma</span>
-        <h2 class="display-mega">
-          Vaše kuchyň<br>ještě před<br><em>první</em> deskou.
-        </h2>
-        <p class="threedee-lead">Ke každé zakázce dostanete <strong>3D vizualizaci zdarma</strong>. Uvidíte vaši budoucí kuchyň ze všech úhlů, barvy, materiály, kování — dřív než začneme řezat první díl.</p>
+        <span class="eyebrow">05 · Bonus zdarma</span>
+        <h2 class="display-mega">Vaše kuchyň<br>ještě před<br><em>první</em> deskou.</h2>
+        <p class="threedee-lead">Ke každé zakázce dostanete <strong>3D vizualizaci zdarma</strong>. Uvidíte, jak bude vypadat, ještě než začneme řezat první díl.</p>
         <ul class="threedee-list">
-          <li><span class="threedee-check">✓</span>Realistický 3D model do 7 dnů od zaměření</li>
+          <li><span class="threedee-check">✓</span>Realistický 3D model do 7 dní od zaměření</li>
           <li><span class="threedee-check">✓</span>Neomezené úpravy, dokud nebudete spokojení</li>
           <li><span class="threedee-check">✓</span>Zdarma i když si kuchyň nakonec nevezmete</li>
         </ul>
-        <a href="/kontakt" class="btn btn--primary btn--lg">Chci 3D návrh →</a>
+        <a href="/kontakt" class="btn btn--primary btn--lg">
+          <span>Chci 3D návrh</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ 6) BEFORE / AFTER SLIDER ═══════════════ -->
+<!-- ═══════════════ BEFORE / AFTER ═══════════════ -->
 <section class="section ba-section">
   <div class="container">
     <div class="section-head-mega section-head-center">
-      <span class="eyebrow">04 / Světlá nebo tmavá?</span>
-      <h2 class="display-mega">Který styl<br>je <em>váš</em>?</h2>
-      <p class="section-lead">Přetáhněte posuvník uprostřed. Vidíte dvě naše realizace — jedna světlá a jedna tmavá. Kterou byste chtěli u sebe doma?</p>
+      <span class="eyebrow">06 · Který styl</span>
+      <h2 class="display-mega">Světlá,<br>nebo <em>tmavá</em>?</h2>
+      <p class="section-lead">Přetáhněte posuvník uprostřed. Dvě naše realizace. Kterou byste chtěli u sebe doma?</p>
     </div>
 
     <div class="ba-slider" data-ba-slider>
       <div class="ba-before">
         <img src="/uploads/real-05.jpg" alt="Světlá kuchyň" />
-        <span class="ba-label ba-label--before">Světlá — real. Praha</span>
+        <span class="ba-label ba-label--before">Světlá</span>
       </div>
       <div class="ba-after">
         <img src="/uploads/real-06.jpg" alt="Tmavá kuchyň" />
-        <span class="ba-label ba-label--after">Tmavá — real. Brno</span>
+        <span class="ba-label ba-label--after">Tmavá</span>
       </div>
       <div class="ba-handle" data-ba-handle>
         <div class="ba-handle-circle">
@@ -273,91 +315,90 @@
   </div>
 </section>
 
-<!-- ═══════════════ 7) PROCES / TIMELINE ═══════════════ -->
+<!-- ═══════════════ PROCES ═══════════════ -->
 <section class="section-dark process-section">
   <div class="container">
     <div class="section-head-mega">
-      <span class="eyebrow eyebrow--accent">05 / Jak spolu pracujeme</span>
+      <span class="eyebrow eyebrow--accent">07 · Jak spolupracujeme</span>
       <h2 class="display-mega">Šest kroků<br>k <em>hotové</em> kuchyni.</h2>
     </div>
 
     <div class="timeline">
-      <div class="timeline-line"></div>
       <div class="timeline-step" data-reveal>
         <div class="timeline-dot"><span>01</span></div>
         <div class="timeline-body">
           <h3>Konzultace</h3>
-          <p>Ozvete se — telefonicky, e-mailem, nebo přes formulář. Probereme prostor, rozpočet, představu.</p>
-          <span class="timeline-time">— 30 minut</span>
+          <p>Zavolejte nebo napište. Probereme prostor, rozpočet, představu.</p>
+          <span class="timeline-time">30 min</span>
         </div>
       </div>
       <div class="timeline-step" data-reveal>
         <div class="timeline-dot"><span>02</span></div>
         <div class="timeline-body">
           <h3>Zaměření</h3>
-          <p>Přijedeme k vám. Změříme na milimetry. Poradíme s dispozicí, materiály, spotřebiči.</p>
-          <span class="timeline-time">— 1–2 hodiny</span>
+          <p>Přijedu k vám. Změříme na milimetry. Poradím s dispozicí, materiály, spotřebiči.</p>
+          <span class="timeline-time">1–2 h</span>
         </div>
       </div>
       <div class="timeline-step" data-reveal>
         <div class="timeline-dot"><span>03</span></div>
         <div class="timeline-body">
-          <h3>Návrh a 3D vizualizace</h3>
-          <p>Připravíme půdorys, 3D vizualizaci a přesnou cenovou nabídku. Nic není povinné — konzultace je nezávazná.</p>
-          <span class="timeline-time">— 7–10 dní</span>
+          <h3>Návrh a 3D</h3>
+          <p>Připravím půdorys, 3D vizualizaci a cenovou nabídku. Nezávazně.</p>
+          <span class="timeline-time">7–10 dní</span>
         </div>
       </div>
       <div class="timeline-step" data-reveal>
         <div class="timeline-dot"><span>04</span></div>
         <div class="timeline-body">
           <h3>Výroba v dílně</h3>
-          <p>V naší dílně vyrábíme přesně to, co jste odsouhlasili. Ručně kontrolujeme každý díl.</p>
-          <span class="timeline-time">— 6–10 týdnů</span>
+          <p>V mé dílně v Olešníku vyrábím přesně to, co jste odsouhlasili.</p>
+          <span class="timeline-time">6–10 týdnů</span>
         </div>
       </div>
       <div class="timeline-step" data-reveal>
         <div class="timeline-dot"><span>05</span></div>
         <div class="timeline-body">
           <h3>Montáž u vás</h3>
-          <p>Precizní instalace, doladění detailů, úklid po sobě. Předáme čistou funkční kuchyni.</p>
-          <span class="timeline-time">— 1–3 dny</span>
+          <p>Precizní instalace, doladění, úklid. Předám čistou funkční kuchyni.</p>
+          <span class="timeline-time">1–3 dny</span>
         </div>
       </div>
       <div class="timeline-step" data-reveal>
         <div class="timeline-dot"><span>06</span></div>
         <div class="timeline-body">
           <h3>Servis a záruka</h3>
-          <p>Roční kontrola panů a spojů. A když je něco potřeba doladit i za 10 let, přijedeme.</p>
-          <span class="timeline-time">— napořád</span>
+          <p>Pět let záruka na výrobu. Blum kování doživotně. Servis dělám sám.</p>
+          <span class="timeline-time">napořád</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ 8) TESTIMONIALS ═══════════════ -->
+<!-- ═══════════════ RECENZE ═══════════════ -->
 <section class="section testimonials-section">
   <div class="container">
     <div class="section-head-mega">
-      <span class="eyebrow">06 / Co říkají klienti</span>
-      <h2 class="display-mega">Kuchyně slouží roky.<br>Vzpomínka na <em>lidi</em>, kteří ji vyrobili, taky.</h2>
+      <span class="eyebrow">08 · Co říkají klienti</span>
+      <h2 class="display-mega">Kuchyň slouží roky.<br>Vzpomínka na <em>lidi</em>, kteří ji dělali, taky.</h2>
     </div>
 
     <div class="testimonials-grid">
       <blockquote class="testimonial" data-reveal>
         <span class="quote-mark">"</span>
-        <p>Kluci Cíhovští nám dělali kuchyň před osmi lety. Nedávno jsem volal, že se uvolnil jeden pant. Přijeli druhý den. To dnes nikdo nedělá.</p>
+        <p>Pan Čihovský nám dělal kuchyň před osmi lety. Nedávno jsem volal, že se uvolnil jeden pant. Přijel druhý den. To dnes nikdo nedělá.</p>
         <footer>
           <strong>Martin K.</strong>
-          <span>Praha 6, moderní kuchyň, 2016</span>
+          <span>České Budějovice · moderní kuchyň · 2016</span>
         </footer>
       </blockquote>
       <blockquote class="testimonial testimonial--featured" data-reveal>
         <span class="quote-mark">"</span>
-        <p>Prošli jsme tři firmy, než jsme narazili na Cíhovské. Jediní, kteří s námi seděli u kávy dvě hodiny a ptali se, jak vaříme. Zbytek nám ukazoval katalog.</p>
+        <p>Prošli jsme tři firmy, než jsme narazili na pana Čihovského. Jediný, který s námi seděl u kávy dvě hodiny a ptal se, jak vaříme. Zbytek nám ukazoval katalog.</p>
         <footer>
           <strong>Petra a Jan B.</strong>
-          <span>Beroun, rustikální kuchyň s ostrůvkem, 2023</span>
+          <span>Písek · rustikální kuchyň s ostrůvkem · 2023</span>
         </footer>
       </blockquote>
       <blockquote class="testimonial" data-reveal>
@@ -365,14 +406,14 @@
         <p>Chtěli jsme dubové dveře do celého domu. Objednali jsme se s vidinou, že to bude drahé. Cenově příjemné překvapení, kvalita nadstandardní.</p>
         <footer>
           <strong>Tomáš V.</strong>
-          <span>Kutná Hora, dveře a šatna, 2024</span>
+          <span>Prachatice · dveře a šatna · 2024</span>
         </footer>
       </blockquote>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ 9) CTA BANNER ═══════════════ -->
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
 <section class="cta-banner">
   <div class="cta-banner-bg" aria-hidden="true">
     <% if (featured && featured[6]) { %>
@@ -380,17 +421,20 @@
     <% } %>
   </div>
   <div class="container cta-banner-content">
-    <span class="eyebrow eyebrow--light">07 / Začneme?</span>
+    <span class="eyebrow eyebrow--light">09 · Začneme?</span>
     <h2 class="display-huge">
       Máte prostor.<br>
-      My máme <em>řemeslo</em>.<br>
+      Mám <em>řemeslo</em>.<br>
       Pojďme se bavit.
     </h2>
     <div class="cta-banner-actions">
-      <a href="/kontakt" class="btn btn--primary btn--xl">Nezávazná konzultace</a>
+      <a href="/kontakt" class="btn btn--primary btn--xl">
+        <span>Nezávazná konzultace</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
       <div class="cta-banner-phone">
-        <span>nebo zavolejte</span>
-        <a href="tel:<%= contact.phone.replace(/\s/g, '') %>"><%= contact.phone %></a>
+        <span>Nebo rovnou zavolejte</span>
+        <a href="tel:+420608032103">+420 608 032 103</a>
       </div>
     </div>
   </div>
@@ -401,10 +445,9 @@
   <div class="container">
     <div class="faq-layout">
       <div class="faq-head">
-        <span class="eyebrow">09 / Časté dotazy</span>
-        <h2 class="display-mega">Než se<br>zeptáte —<br>možná<br><em>odpovídáme</em>.</h2>
-        <p class="section-lead">Nenašli jste odpověď? Napište nám. Odpovídáme obvykle do jednoho pracovního dne.</p>
-        <a href="/kontakt" class="btn btn--ghost btn--dark" style="margin-top:24px">Zeptat se osobně →</a>
+        <span class="eyebrow">10 · Časté dotazy</span>
+        <h2 class="display-mega">Než se<br>zeptáte —<br>možná<br><em>odpovídám</em>.</h2>
+        <p class="section-lead">Nenašli jste odpověď? Zavolejte. Zvedám telefon vždy — <a href="tel:+420608032103" style="border-bottom:1px solid var(--ink)">+420 608 032 103</a>.</p>
       </div>
       <div class="faq-list">
         <details class="faq-item">
@@ -440,7 +483,7 @@
             <span class="faq-icon" aria-hidden="true">+</span>
           </summary>
           <div class="faq-answer">
-            <p>Masiv (dub, buk, jasan), kvalitní dýhy, MDF s lakovaným povrchem, HPL, dekory Egger a Kronospan. Pracovní desky z laminátu, kompozitů (Silestone, Dekton) nebo přírodního kamene. Kování Blum s doživotní zárukou. Bez laciných zkratek.</p>
+            <p>Masiv (dub, buk, jasan), kvalitní dýhy, MDF s lakovaným povrchem, HPL, dekory Egger a Kronospan. Pracovní desky z laminátu, kompozitů (Silestone, Dekton) nebo přírodního kamene. Kování Blum s doživotní zárukou.</p>
           </div>
         </details>
         <details class="faq-item">
@@ -463,11 +506,11 @@
         </details>
         <details class="faq-item">
           <summary>
-            <span>Vyrábíte i mimo Prahu/Středočeský kraj?</span>
+            <span>Jezdíte i mimo jižní Čechy?</span>
             <span class="faq-icon" aria-hidden="true">+</span>
           </summary>
           <div class="faq-answer">
-            <p>Ano, jezdíme po celé ČR. Doprava a montáž mimo Prahu se řeší individuálně — obvykle je součástí ceny bez příplatku, u vzdálenějších lokalit se doplácí jen doprava.</p>
+            <p>Ano, jezdíme po celé ČR. Doprava a montáž se řeší individuálně — obvykle je součástí ceny bez příplatku, u vzdálenějších lokalit se doplácí jen doprava.</p>
           </div>
         </details>
         <details class="faq-item">
@@ -476,7 +519,7 @@
             <span class="faq-icon" aria-hidden="true">+</span>
           </summary>
           <div class="faq-answer">
-            <p>Do zahájení výroby ano bez příplatku. Během výroby v rámci možností — něčeho už koupeno, něčeho ne. Vždy vám řekneme, co to znamená pro cenu a termín, a čekáme na váš souhlas.</p>
+            <p>Do zahájení výroby ano bez příplatku. Během výroby v rámci možností — něco už koupeno, něco ne. Vždy vám řeknu, co to znamená pro cenu a termín, a čekám na váš souhlas.</p>
           </div>
         </details>
       </div>
@@ -484,17 +527,18 @@
   </div>
 </section>
 
-<!-- ═══════════════ 10) INSTAGRAM MOCK ═══════════════ -->
+<!-- ═══════════════ INSTAGRAM ═══════════════ -->
 <section class="section ig-section">
   <div class="container">
     <div class="section-head-mega section-head-split">
       <div>
-        <span class="eyebrow">08 / Sledujte dílnu</span>
+        <span class="eyebrow">11 · Sledujte dílnu</span>
         <h2 class="display-mega">Denně z dílny<br>na <em>Instagram</em>.</h2>
       </div>
       <% if (contact.instagram) { %>
         <a href="<%= contact.instagram %>" target="_blank" rel="noopener" class="btn btn--ghost btn--dark">
-          @kuchyne_cihovsky →
+          <span>@kuchyne_cihovsky</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       <% } %>
     </div>
