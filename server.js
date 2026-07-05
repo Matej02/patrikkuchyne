@@ -15,7 +15,7 @@ ensureSeed();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const BUILD_VERSION = 'v9';
+const BUILD_VERSION = 'v10';
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -60,12 +60,24 @@ app.use((req, res, next) => {
 app.get('/__version', (req, res) => {
   const fs = require('fs');
   const uploadsDir = path.join(__dirname, 'public', 'uploads');
-  let realCount = 0;
-  try {
-    realCount = fs.readdirSync(uploadsDir).filter(f => f.startsWith('real-') && f.endsWith('.jpg')).length;
-  } catch (_) {}
+  let files = [];
+  let readErr = null;
+  try { files = fs.readdirSync(uploadsDir); } catch (e) { readErr = e.message; }
+  const realFiles = files.filter(f => f.startsWith('real-') && f.endsWith('.jpg'));
   const dbRealCount = db.prepare("SELECT COUNT(*) as n FROM photos WHERE filename LIKE 'real-%'").get().n;
-  res.json({ build: BUILD_VERSION, realFilesOnDisk: realCount, realRecordsInDb: dbRealCount, node: process.version });
+  res.json({
+    build: BUILD_VERSION,
+    node: process.version,
+    cwd: process.cwd(),
+    __dirname,
+    uploadsDir,
+    uploadsDirExists: fs.existsSync(uploadsDir),
+    totalFilesInUploads: files.length,
+    realFilesOnDisk: realFiles.length,
+    firstFiles: files.slice(0, 10),
+    readErr,
+    realRecordsInDb: dbRealCount,
+  });
 });
 
 app.use('/', publicRoutes);
